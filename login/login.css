@@ -1,0 +1,168 @@
+/*-------GENERAL STYLES-------*/
+
+* {
+    box-sizing: border-box;
+}
+
+input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    font-size: 15px;
+}
+
+
+/*----------BODY STYLES-----------*/
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #254050;
+    height: 100%;
+    width: 100%;
+    font-family: sans-serif;
+    overflow: hidden;
+}
+
+
+/*---------------LOGIN STYLES-----------------*/
+
+.login-box {
+    width: 320px;
+    height: 400px;
+    background: #ffffff;
+    color: black;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+    border-radius: 15px;
+}
+
+.avatar {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
+}
+
+.login-box h1 {
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.login-box .data label {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    display: block;
+}
+
+.login-box .data input {
+    width: 100%;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.login-box .data input[type="text"],
+.login-box .data input[type="password"] {
+    border: none;
+    border-bottom: 1px solid black;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: black;
+    font-size: 16px;
+}
+
+.login-box .data input[type="submit"] {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #11A0BF;
+    color: #ffffff;
+    font-size: 18px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.login-box .data input[type='checkbox'] {
+    height: 20px;
+    width: 20px;
+}
+
+.form-user {
+    position: relative;
+    color: black;
+    font-size: 16px;
+}
+
+.form-user input {
+    width: 100%;
+    height: 40px;
+    color: black;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    font-size: 16px;
+}
+
+.form-user .fa-user {
+    position: absolute;
+    padding: 12px;
+    top: 16px;
+    left: 10px;
+    color: grey;
+}
+
+.form-user .fa-user {
+    left: 230px;
+}
+
+.form-user .fa-key {
+    position: absolute;
+    padding: 12px;
+    top: 16px;
+    left: 10px;
+    color: grey;
+}
+
+.form-user .fa-key {
+    left: 230px;
+}
+
+.form-options {
+    margin-bottom: 10px;
+}
+
+
+/*------------Estilos del footer--------------*/
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 13px;
+    background: #000000;
+}
+
+
+/*-----------Estilos responsive----------*/
+
+@media(min-width:1024px) {
+    body {
+        overflow: hidden;
+    }
+    .footer {
+        background: #1F1A17;
+    }
+}

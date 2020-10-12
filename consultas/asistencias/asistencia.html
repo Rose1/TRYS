@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistencias</title>
+    <link rel="stylesheet" type="text/css" href="asistencia.css">
+</head>
+
+<body>
+
+    <!-- TOP NAVBAR -->
+    <div class="container-navbar">
+        <div class="topnav" id="myTopnav">
+            <a href="" class="left"><i class="fa fa-home"></i><strong> Inicio</strong></a>
+            <a href="" class="left"><i class="fa fa-puzzle-piece"></i><strong> Procesos</strong></a>
+            <div class="dropdown left">
+                <button class="dropbtn">
+                <i class="fa fa-search"></i><strong>Consultas</strong>
+                <i class="fa fa-caret-down"></i>
+            </button>
+                <div class="dropdown-content">
+                    <a href="#"><i class="fas fa-clock"></i> Tiempos de control</a>
+                    <a href="#"><i class="fas fa-map-marker-alt"></i> Monitoreo</a>
+                    <a href="#"><i class="fas fa-map"></i> Recorrido</a>
+                    <a href="#"><i class="fas fa-clock"></i> Asistencias</a>
+                    <a href="#"><i class="fas fa-wifi"></i> Conectados</a>
+                </div>
+            </div>
+            <div class="dropdown left">
+                <button class="dropbtn">
+                <i class="fa fa-cog"></i><strong> Configuración</strong>
+                <i class="fa fa-caret-down"></i>
+            </button>
+                <div class="dropdown-content">
+                    <a href="#" id="btnModalInitialConf"><i class="fas fa-paper-plane"></i> Enviar conf. inicial</a>
+                    <a href="#" id="btnModalControlPoints"><i class="fas fa-paper-plane"></i> Enviar ptos. control</a>
+                    <a href="#" id="btnModalReset"><i class="fas fa-sync-alt"></i> Reset</a>
+                    <a href="#" id="btnModalChangeNro"><i class="fas fa-wrench"></i> Cambiar nro. vehiculo</a>
+                    <a href="#"><i class="fas fa-bus"></i> Paraderos</a>
+                    <a href="#" id="btnModalSendStations"><i class="fas fa-paper-plane"></i> Enviar paraderos</a>
+                </div>
+            </div>
+            <div class="dropdown right">
+                <button class="dropbtn">
+                    <i class="fas fa-user"></i>
+                    <strong>Admin AB</strong>
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#">Administración</a>
+                    <a href="#"><i class="fas fa-sign-out-alt"></i> Salir</a>
+                </div>
+            </div>
+            <a href="javascript:void(0);" class="right hour active">
+                <h4 id="box-time"><strong></strong></h4>
+            </a>
+            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="hamburgerMenu()">&#9776;</a>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="container">
+        <div class="table-content">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Asistencia</h4>
+                    <div class="right-header">
+                        <label for="">Busqueda</label>
+                        <input type="text" name="search" id="searchInput" placeholder="Buscar">
+
+                        <select name="tools" id="tools" aria-placeholder="Herramientas">
+                            <option value="print"><i class="fas fa-file-print"></i> Imprimir</option>
+                            <option value="pdf"><i class="fas fa-file-pdf"></i> PDF</option>
+                            <option value="excel"><i class="fas fa-file-excel"></i> Excel</option>
+                        </select>
+                        <a href=""><i class="fas fa-expand"></i></a>
+                    </div>
+                </div>
+                <div id="table-container" class="card-body" style="overflow-x: auto;">
+                    <table id="data-table" class="table-sortable">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="parent"></th>
+                                <th><span>Nro. Bus</span></th>
+                                <th><span>Fecha</span></th>
+                                <th><span>Hr. Asist.</span></th>
+                                <th><span>Hr. Crono.</span></th>
+                                <th><span>Diferencia</span></th>
+                                <th><span>Acciones</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" name="check" id="child_chkbx"></td>
+                                <td>001</td>
+                                <td>Dom</td>
+                                <td>35</td>
+                                <td>Web Developer</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" id="child_chkbx"></td>
+                                <td>002</td>
+                                <td>Rebecca</td>
+                                <td>29</td>
+                                <td>Teacher</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" id="child_chkbx"></td>
+                                <td>003</td>
+                                <td>John</td>
+                                <td>30</td>
+                                <td>Civil Engineer</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" id="child_chkbx"></td>
+                                <td>015</td>
+                                <td>Andre</td>
+                                <td>12</td>
+                                <td>Dentist</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" id="child_chkbx"></td>
+                                <td>005</td>
+                                <td>Peter</td>
+                                <td>26</td>
+                                <td>Policeman</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" id="child_chkbx"></td>
+                                <td>018</td>
+                                <td>Lilian</td>
+                                <td>18</td>
+                                <td>Doctor</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" id="child_chkbx"></td>
+                                <td>007</td>
+                                <td>Andre</td>
+                                <td>33</td>
+                                <td>Dentist</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" id="child_chkbx"></td>
+                                <td>008</td>
+                                <td>Samantha</td>
+                                <td>22</td>
+                                <td>Dentist</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" id="child_chkbx"></td>
+                                <td>009</td>
+                                <td>Dorothea</td>
+                                <td>57</td>
+                                <td>Dentist</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" id="child_chkbx"></td>
+                                <td>010</td>
+                                <td>Vincent</td>
+                                <td>55</td>
+                                <td>Carpenter</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" id="child_chkbx"></td>
+                                <td>011</td>
+                                <td>Jesus</td>
+                                <td>50</td>
+                                <td>Manager</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" id="child_chkbx"></td>
+                                <td>016</td>
+                                <td>Fanny</td>
+                                <td>53</td>
+                                <td>Seller</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" id="child_chkbx"></td>
+                                <td>012</td>
+                                <td>Karen</td>
+                                <td>29</td>
+                                <td>Assistent</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" id="child_chkbx"></td>
+                                <td>014</td>
+                                <td>Katherin</td>
+                                <td>29</td>
+                                <td>Engineer</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-query">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Consultar asistencia</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="nroBus" class="label-style">Nro. de vehiculo: </label>
+                        <input class="input-style" list="nroBus" placeholder="Buscar vehículo...">
+                        <datalist id="nroBus">
+                            <option>01</option>
+                            <option>02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option>07</option>
+                            <option>08</option>
+                            <option>10</option>
+                            <option>15</option>
+                            <option>19</option>
+                            <option>20</option>
+                            <option>21</option>
+                            <option>22</option>
+                            <option>23</option>
+                            <option>24</option>
+                            <option>30</option>
+                            <option>35</option>
+                            <option>40</option>
+                        </datalist>
+                    </div>
+                    <div class="form-group">
+                        <label for="input1" class="label-style">Fecha inicial: </label>
+                        <input class="input-style" id="input1" type="date" placeholder="25/08/20">
+                    </div>
+                    <div class="form-group">
+                        <label for="input2" class="label-style">Fecha final: </label>
+                        <input class="input-style" id="input2" type="date" placeholder="25/08/20">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="button is-info" onclick="document.getElementById('modalVehicleAssistance').style.display='none'">                          
+                        <i class="fas fa-search"></i>Buscar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="asistencia.js"></script>
+    <script src="https://kit.fontawesome.com/74ef1d0087.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

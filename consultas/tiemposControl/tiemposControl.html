@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiempos de control</title>
+    <link rel="stylesheet" type="text/css" href="tiemposControl.css">
+    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">-->
+</head>
+
+<body>
+    <!-- TOP NAVBAR -->
+    <div class="container-navbar">
+        <div class="topnav" id="myTopnav">
+            <a href="" class="left"><i class="fa fa-home"></i><strong> Inicio</strong></a>
+            <a href="" class="left"><i class="fa fa-puzzle-piece"></i><strong> Procesos</strong></a>
+            <div class="dropdown left">
+                <button class="dropbtn">
+                <i class="fa fa-search"></i><strong>Consultas</strong>
+                <i class="fa fa-caret-down"></i>
+            </button>
+                <div class="dropdown-content">
+                    <a href="#"><i class="fas fa-clock"></i> Tiempos de control</a>
+                    <a href="#"><i class="fas fa-map-marker-alt"></i> Monitoreo</a>
+                    <a href="#"><i class="fas fa-map"></i> Recorrido</a>
+                    <a href="#"><i class="fas fa-clock"></i> Asistencias</a>
+                    <a href="#"><i class="fas fa-wifi"></i> Conectados</a>
+                </div>
+            </div>
+            <div class="dropdown left">
+                <button class="dropbtn">
+                <i class="fa fa-cog"></i><strong> Configuración</strong>
+                <i class="fa fa-caret-down"></i>
+            </button>
+                <div class="dropdown-content">
+                    <a href="#" id="btnModalInitialConf"><i class="fas fa-paper-plane"></i> Enviar conf. inicial</a>
+                    <a href="#" id="btnModalControlPoints"><i class="fas fa-paper-plane"></i> Enviar ptos. control</a>
+                    <a href="#" id="btnModalReset"><i class="fas fa-sync-alt"></i> Reset</a>
+                    <a href="#" id="btnModalChangeNro"><i class="fas fa-wrench"></i> Cambiar nro. vehiculo</a>
+                    <a href="#"><i class="fas fa-bus"></i> Paraderos</a>
+                    <a href="#" id="btnModalSendStations"><i class="fas fa-paper-plane"></i> Enviar paraderos</a>
+                </div>
+            </div>
+            <div class="dropdown right">
+                <button class="dropbtn">
+                    <i class="fas fa-user"></i>
+                    <strong>Admin AB</strong>
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#">Administración</a>
+                    <a href="#"><i class="fas fa-sign-out-alt"></i> Salir</a>
+                </div>
+            </div>
+            <a href="javascript:void(0);" class="right hour active">
+                <h4 id="box-time"><strong></strong></h4>
+            </a>
+            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="hamburgerMenu()">&#9776;</a>
+        </div>
+    </div>
+
+    <!--CONTENT-->
+    <div class="container">
+        <div class="time-control">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="right">Tiempos de control</h4>
+                    <div class="right-header">
+                        <label for="">Busqueda</label>
+                        <input type="text" placeholder="Buscar">
+
+                        <select name="tools" id="tools" aria-placeholder="Herramientas">
+                                <option value="print"><i class="fas fa-file-print"></i> Imprimir</option>
+                                <option value="pdf"><i class="fas fa-file-pdf"></i> PDF</option>
+                                <option value="excel"><i class="fas fa-file-excel"></i> Excel</option>
+                            </select>
+                        <a href=""><i class="fas fa-expand"></i></a>
+                    </div>
+                </div>
+                <div class="card-body scrollTable" style="overflow-x: auto;">
+                    <table>
+                        <tr>
+                            <th><input type="checkbox" id="allTable" name="allTable" value="allTable"></th>
+                            <th><span>Nro. Bus</span></th>
+                            <th><span>Vuelta</span></th>
+                            <th><span>Fecha</span></th>
+                            <th><span>Partida</span></th>
+                            <th><span>Point 1</span></th>
+                            <th><span>Point 3</span></th>
+                            <th><span>Point 4</span></th>
+                            <th><span>Point 5</span></th>
+                            <th><span>Point 6</span></th>
+                            <th><span>Point 6</span></th>
+                            <th><span>Point 8</span></th>
+                            <th><span>Point 9</span></th>
+                            <th><span>Final</span></th>
+                            <th><span>Suma</span></th>
+                            <th><span>Acción</span></th>
+                        </tr>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" id="row1" name="row1"></td>
+                                <td><strong>123</strong></td>
+                                <td>5</td>
+                                <td id="hour">20:15</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>+8</td>
+                                <td>+12</td>
+                                <td>+1</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="row2" name="row2"></td>
+                                <td><strong>056</strong></td>
+                                <td>4</td>
+                                <td id="hour">13:25</td>
+                                <td>+9</td>
+                                <td>+9</td>
+                                <td>+9</td>
+                                <td>+9</td>
+                                <td>+9</td>
+                                <td>+9</td>
+                                <td>+9</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>-8</td>
+                                <td>2</td>
+                                <td>+1</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="row3" name="row3"></td>
+                                <td><strong>014</strong></td>
+                                <td>2</td>
+                                <td id="hour"></td>
+                                <td>+5</td>
+                                <td>-5</td>
+                                <td>5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>0</td>
+                                <td>-8</td>
+                                <td>+2</td>
+                                <td>+2</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="row4" name="row4"></td>
+                                <td><strong>123</strong></td>
+                                <td>5</td>
+                                <td id="hour"></td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>+8</td>
+                                <td>+2</td>
+                                <td>+2</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="row5" name="row5"></td>
+                                <td><strong>123</strong></td>
+                                <td>5</td>
+                                <td id="hour">20:45</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>+8</td>
+                                <td>+2</td>
+                                <td>+2</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="row6" name="row6"></td>
+                                <td><strong>123</strong></td>
+                                <td>5</td>
+                                <td id="hour"></td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>+8</td>
+                                <td>+2</td>
+                                <td>+2</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="row7" name="row7"></td>
+                                <td><strong>123</strong></td>
+                                <td>5</td>
+                                <td id="hour"></td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>+8</td>
+                                <td>+2</td>
+                                <td>+2</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="row8" name="row8"></td>
+                                <td><strong>123</strong></td>
+                                <td>5</td>
+                                <td id="hour"></td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>+8</td>
+                                <td>+2</td>
+                                <td>+2</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="row9" name="row9"></td>
+                                <td><strong>123</strong></td>
+                                <td>5</td>
+                                <td id="hour"></td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>+8</td>
+                                <td>+2</td>
+                                <td>+2</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="row10" name="row10"></td>
+                                <td><strong>123</strong></td>
+                                <td>5</td>
+                                <td id="hour"></td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>+8</td>
+                                <td>+2</td>
+                                <td>+2</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="row11" name="row11"></td>
+                                <td><strong>123</strong></td>
+                                <td>5</td>
+                                <td id="hour"></td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>+8</td>
+                                <td>+2</td>
+                                <td>+2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="query">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Consultar vehiculo</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="nroBus" class="label-style">Nro. de vehiculo: </label>
+                        <input class="input-style" list="nroBus" placeholder="Buscar vehículo...">
+                        <datalist id="nroBus">
+                            <option>01</option>
+                            <option>02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option>07</option>
+                            <option>08</option>
+                            <option>10</option>
+                            <option>15</option>
+                            <option>19</option>
+                            <option>20</option>
+                            <option>21</option>
+                            <option>22</option>
+                            <option>23</option>
+                            <option>24</option>
+                            <option>30</option>
+                            <option>35</option>
+                            <option>40</option>
+                        </datalist>
+                    </div>
+                    <div class="form-group">
+                        <label for="date1">Fecha inicial: </label>
+                        <input class="input-style" type="date" id="date1" placeholder="25/08/20">
+                    </div>
+                    <div class="form-group">
+                        <label for="date2" class="label-style">Fecha final: </label>
+                        <input class="input-style" type="date" id="date2" placeholder="25/08/20">
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <button class="is-info" onclick="document.getElementById('modalVehicleQuery').style.display='none'">                          
+                        <i class="fas fa-search"></i>                           
+                        Buscar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="tiemposControl.js"></script>
+    <script src="https://kit.fontawesome.com/74ef1d0087.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

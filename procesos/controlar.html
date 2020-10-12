@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procesos-Controlar</title>
+    <link rel="stylesheet" type="text/css" href="controlar.css">
+
+</head>
+
+<body>
+    <!-- TOP NAVBAR -->
+    <div class="container-navbar">
+        <div class="topnav" id="myTopnav">
+            <a href="" class="left"><i class="fa fa-home"></i><strong> Inicio</strong></a>
+            <a href="" class="left"><i class="fa fa-puzzle-piece"></i><strong> Procesos</strong></a>
+            <div class="dropdown left">
+                <button class="dropbtn">
+                <i class="fa fa-search"></i><strong>Consultas</strong>
+                <i class="fa fa-caret-down"></i>
+            </button>
+                <div class="dropdown-content">
+                    <a href="#"><i class="fas fa-clock"></i> Tiempos de control</a>
+                    <a href="#"><i class="fas fa-map-marker-alt"></i> Monitoreo</a>
+                    <a href="#"><i class="fas fa-map"></i> Recorrido</a>
+                    <a href="#"><i class="fas fa-clock"></i> Asistencias</a>
+                    <a href="#"><i class="fas fa-wifi"></i> Conectados</a>
+                </div>
+            </div>
+            <div class="dropdown left">
+                <button class="dropbtn">
+                <i class="fa fa-cog"></i><strong> Configuración</strong>
+                <i class="fa fa-caret-down"></i>
+            </button>
+                <div class="dropdown-content">
+                    <a href="#" id="btnModalInitialConf"><i class="fas fa-paper-plane"></i> Enviar conf. inicial</a>
+                    <a href="#" id="btnModalControlPoints"><i class="fas fa-paper-plane"></i> Enviar ptos. control</a>
+                    <a href="#" id="btnModalReset"><i class="fas fa-sync-alt"></i> Reset</a>
+                    <a href="#" id="btnModalChangeNro"><i class="fas fa-wrench"></i> Cambiar nro. vehiculo</a>
+                    <a href="#"><i class="fas fa-bus"></i> Paraderos</a>
+                    <a href="#" id="btnModalSendStations"><i class="fas fa-paper-plane"></i> Enviar paraderos</a>
+                </div>
+            </div>
+            <div class="dropdown right">
+                <button class="dropbtn">
+                    <i class="fas fa-user"></i>
+                    <strong>Admin AB</strong>
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#">Administración</a>
+                    <a href="#"><i class="fas fa-sign-out-alt"></i> Salir</a>
+                </div>
+            </div>
+            <a href="javascript:void(0);" class="right hour active">
+                <h4 id="box-time"><strong></strong></h4>
+            </a>
+            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="hamburgerMenu()">&#9776;</a>
+        </div>
+    </div>
+
+    <!--CONTENT-->
+    <div class="container">
+        <div class="time-control">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Tiempos de control</h4>
+                    <div class="right-header">
+                        <label for="">Busqueda</label>
+                        <input type="text" name="search" id="searchInput" placeholder="Buscar">
+                        <label>Filtrar </label>
+                        <button class="is-secondary">Flota: 125</button>
+                        <button class="is-secondary">AB: 46</button>
+                        <button class="is-secondary">BA: 12</button>
+                        <button class="is-secondary">TermA: 12</button>
+                        <button class="is-secondary">TermB: 16</button>
+                        <a href=""><i class="fas fa-expand"></i></a>
+                    </div>
+
+                </div>
+                <div id="table-container" class="card-body" style="overflow-x: auto;">
+                    <table id="data-table" class="table-sortable">
+                        <tr>
+                            <th><input type="checkbox"></th>
+                            <th><span>Nro. Bus</span></th>
+                            <th><span>Vuelta</span></th>
+                            <th><span>Partida</span></th>
+                            <th><span>Point 1</span></th>
+                            <th><span>Point 2</span></th>
+                            <th><span>Point 3</span></th>
+                            <th><span>Point 4</span></th>
+                            <th><span>Point 5</span></th>
+                            <th><span>Point 6</span></th>
+                            <th><span>Point 6</span></th>
+                            <th><span>Point 8</span></th>
+                            <th><span>Point 9</span></th>
+                            <th><span>Suma</span></th>
+                            <th><span>Acción</span></th>
+                            <th><span>Tickets</span></th>
+                        </tr>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" name="check"></td>
+                                <td>001</td>
+                                <td>5</td>
+                                <td id="hour"></td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>+8</td>
+                                <td><button><i class="fas fa-volume-up"></i></button></td>
+                                <td><button>Ticket</button></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check"></td>
+                                <td>002</td>
+                                <td>4</td>
+                                <td id="hour"></td>
+                                <td>+9</td>
+                                <td>+9</td>
+                                <td>+9</td>
+                                <td>+9</td>
+                                <td>+9</td>
+                                <td>+9</td>
+                                <td>+9</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>-8</td>
+                                <td><button><i class="fas fa-volume-up"></i></button></td>
+                                <td><button>Ticket</button></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check"></td>
+                                <td>003</td>
+                                <td>2</td>
+                                <td id="hour"></td>
+                                <td>+5</td>
+                                <td>-5</td>
+                                <td>5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>0</td>
+                                <td>-8</td>
+                                <td><button><i class="fas fa-volume-up"></i></button></td>
+                                <td><button>Ticket</button></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check"></td>
+                                <td>004</td>
+                                <td>5</td>
+                                <td id="hour"></td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>+8</td>
+                                <td><button><i class="fas fa-volume-up"></i></button></td>
+                                <td><button>Ticket</button></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check"></td>
+                                <td>005</td>
+                                <td>5</td>
+                                <td id="hour"></td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>+8</td>
+                                <td><button><i class="fas fa-volume-up"></i></button></td>
+                                <td><button>Ticket</button></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check"></td>
+                                <td>006</td>
+                                <td>5</td>
+                                <td id="hour"></td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>+8</td>
+                                <td><button><i class="fas fa-volume-up"></i></button></td>
+                                <td><button>Ticket</button></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check"></td>
+                                <td>007</td>
+                                <td>5</td>
+                                <td id="hour"></td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>+8</td>
+                                <td><button><i class="fas fa-volume-up"></i></button></td>
+                                <td><button>Ticket</button></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check"></td>
+                                <td>008</td>
+                                <td>5</td>
+                                <td id="hour"></td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>+8</td>
+                                <td><button><i class="fas fa-volume-up"></i></button></td>
+                                <td><button>Ticket</button></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check"></td>
+                                <td>009</td>
+                                <td>5</td>
+                                <td id="hour"></td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>+8</td>
+                                <td><button><i class="fas fa-volume-up"></i></button></td>
+                                <td><button>Ticket</button></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check"></td>
+                                <td>010</td>
+                                <td>5</td>
+                                <td id="hour"></td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>+8</td>
+                                <td><button><i class="fas fa-volume-up"></i></button></td>
+                                <td><button>Ticket</button></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check"></td>
+                                <td>011</td>
+                                <td>5</td>
+                                <td id="hour"></td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>-5</td>
+                                <td>+5</td>
+                                <td>+5</td>
+                                <td>-2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>+8</td>
+                                <td><button><i class="fas fa-volume-up"></i></button></td>
+                                <td><button>Ticket</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="departures">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Partidas</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form">
+                        <div class="form-group form__group">
+                            <label for="busOptions" class="label-style">Nro. de vehículo </label>
+                            <select name="busOptions" id="busOptions" data-dropdown>
+                                <option value="">Seleccione un nro. de bus</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="30">30</option>
+                                <option value="35">35</option>
+                                <option value="40">40</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="hour1" class="label-style">Hora </label>
+                        <input class="input-style" type="time" id="time1" value="">
+                    </div>
+                    <div class="form-group">
+                        <label class="label-style">Formato de hora </label>
+                        <input type="radio" id="shortHour" name="formatHour" value="short" checked>
+                        <label for="shortHout">Corto</label>
+                        <input type="radio" id="longHour" name="formatHour" value="long">
+                        <label for="longHour">Largo</label>
+                        <input type="radio" id="holidayHour" name="formatHour" value="holiday">
+                        <label for="holidayHour">Feriado</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-style">Punto de inicio </label>
+                        <input class="input-style" list="controlPoint" placeholder="Buscar punto de inicio">
+                        <datalist id="controlPoint">
+                            <option>AAA</option>
+                            <option>BBB</option>
+                            <option>CCC</option>
+                            <option>DDD</option>
+                            <option>EEE</option>
+                            <option>FFF</option>
+                            <option>GGG</option>
+                            <option>ABC</option>
+                            <option>ABD</option>
+                            <option>CVH</option>
+                            <option>CUN</option>
+                            <option>KMD</option>
+                        </datalist>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="switch-button">
+                        <input type="checkbox" name="switch-button" id="switch-label" class="switch-button__checkbox">
+                        <label for="switch-label" class="switch-button__label"></label>
+                    </div>
+                    <i class="fas fa-print"></i>
+                    <button type="submit" class="is-info"><i class="fas fa-paper-plane"></i> Enviar</button>
+
+                </div>
+            </div>
+        </div>
+        <div class="bus-info">
+            <div class="card">
+                <div class="card-header flex">
+                    <label for=""><strong>Bus nro: 15</strong></label>
+                    <label for=""><strong>Direccion: A->B</strong></label>
+                    <label for=""><strong>Velocidad: 23km/h</strong></label>
+                    <label for=""><strong>Propietario: Jorge Tacusi Carrion</strong></label>
+                    <label for=""><strong>Placa: ABC-723</strong></label>
+                </div>
+                <div class="card-body flex">
+                    <img src="../img/Conductor1.png" id="imageConductor" onclick="" class="image" alt="conductor">
+                    <img src="../img/conductor2.jpg" id="imageCobrador" onclick="" class="image" alt="cobrador">
+                    <button type="button" class="tooltip">
+                        <i class="fas fa-map-marker-alt fa-2x"></i>
+                        <span class="toolTipText">Monitoreo</span>
+                    </button>
+                    <button type="button" class="tooltip">
+                        <i class="fas fa-map fa-2x"></i>
+                        <span class="toolTipText">Recorrido</span>
+                    </button>
+                    <button type="button" class="tooltip">
+                        <i class="fas fa-calendar-times fa-2x"></i>
+                        <span class="toolTipText">Finalizar</span>
+                    </button>
+                    <button type="button" class="tooltip">
+                        <i class="fas fa-ban fa-2x"></i>
+                        <span class="toolTipText">Cancelar</span>
+                    </button>
+                    <button type="button" class="tooltip">
+                        <i class="fas fa-bell fa-2x"></i>
+                        <span class="toolTipText">Alarmas</span>
+                    </button>
+                    <button type="button" class="tooltip">
+                        <i class="fas fa-wifi fa-2x"></i>
+                        <span class="toolTipText">Conectado</span>
+                    </button>
+                    <button type="button" class="tooltip">
+                        <i class="fas fa-chart-line fa-2x"></i>
+                        <span class="toolTipText">Producción</span>
+                    </button>
+                    <button type="button" class="tooltip">
+                        <i class="fas fa-tools fa-2x"></i>
+                        <span class="toolTipText">Mantenimiento</span>
+                    </button>
+                    <button type="button" id="btnMessage" class="tooltip">
+                        <i class="fas fa-comment-alt fa-2x"></i>
+                        <span class="toolTipText">Mensaje</span>
+                    </button>
+                    <button id="btnDepartureProgrammed" class="tooltip">
+                        <i class="fas fa-calendar-alt fa-2x"></i>
+                        <span class="toolTipText">Partida programada</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-----------------MODALS------------------>
+
+    <!--modal send departure programmed -->
+    <div class="modal" id="programmedDeparture">
+        <div class="modal-content">
+            <div class="modal-header">
+                Enviar partida programada
+                <span class="close" id="close1">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="label-style" for="nroBus">Nro. de vehículo </label>
+                    <input class="input-style" list="nroBus" placeholder="Buscar vehículo...">
+                    <datalist id="nroBus">
+                        <option>01</option>
+                        <option>02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option>07</option>
+                        <option>08</option>
+                        <option>10</option>
+                        <option>15</option>
+                        <option>19</option>
+                        <option>20</option>
+                        <option>21</option>
+                        <option>22</option>
+                        <option>23</option>
+                        <option>24</option>
+                        <option>30</option>
+                        <option>35</option>
+                        <option>40</option>
+                    </datalist>
+
+                </div>
+                <div class="form-group">
+                    <label class="label-style" for="">Fecha </label>
+                    <input class="input-style" id="dateDefault" type="date" value="">
+                </div>
+                <div class="form-group">
+                    <label for="hour2" class="label-style">Hora </label>
+                    <input class="input-style" type="time" id="time2" value="">
+                </div>
+                <div class="form-group">
+                    <label class="label-style">Formato de hora </label>
+                    <input type="radio" id="shortHour" name="formatHour" value="short">
+                    <label for="shortHour">Corto</label>
+                    <input type="radio" id="longHour" name="formatHour" value="long">
+                    <label for="longHour">Largo</label>
+                    <input type="radio" id="holidayHour" name="formatHour" value="holiday">
+                    <label for="holidayHour">Feriado</label>
+                </div>
+                <div class="form-group">
+                    <label class="label-style">Punto de inicio </label>
+                    <input class="input-style" list="controlPoint" placeholder="Buscar punto de inicio...">
+                    <datalist id="controlPoint">
+                        <option>AAA</option>
+                        <option>BBB</option>
+                        <option>CCC</option>
+                        <option>DDD</option>
+                        <option>EEE</option>
+                        <option>FFF</option>
+                        <option>GGG</option>
+                        <option>ABC</option>
+                        <option>ABD</option>
+                        <option>CVH</option>
+                        <option>CUN</option>
+                        <option>KMD</option>
+                          
+                    </datalist>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="button is-terciary" onclick="document.getElementById('programmedDeparture').style.display='none'">
+                    Cerrar
+                </button>
+                <button class="is-info">                          
+                    <i class="fas fa-save"></i>                           
+                    Guardar
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <!--modal send message-->
+
+    <div class="modal" id="message">
+        <div class="modal-content">
+            <div class="modal-header">
+                Enviar mensaje
+                <span class="close" id="close2">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="">Nro. de vehiculo: </label>
+                    <input class="input-style" list="nroBusMessage" placeholder="Buscar vehículo...">
+                    <datalist id="nroBusMessage">
+                        <option>01</option>
+                        <option>02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option>07</option>
+                        <option>08</option>
+                        <option>10</option>
+                        <option>15</option>
+                        <option>19</option>
+                        <option>20</option>
+                        <option>21</option>
+                        <option>22</option>
+                        <option>23</option>
+                        <option>24</option>
+                        <option>30</option>
+                        <option>35</option>
+                        <option>40</option>
+                    </datalist>
+
+                </div>
+                <div class="form-group">
+                    <label for="">Mensaje: </label>
+                    <textarea name="" id="" cols="30" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="button is-terciary" onclick="document.getElementById('message').style.display='none'">
+                    Cerrar
+                </button>
+                <button class="button is-info">                          
+                    <i class="fas fa-paper-plane"></i>                           
+                    Enviar
+                </button>
+
+            </div>
+        </div>
+    </div>
+    <!--modal conductor-->
+
+    <div class="modal" id="modalConductor">
+        <div class="modal-content">
+            <div class="modal-header">
+                Conductor de la unidad Nro: 56
+                <span class="close" id="close3">&times;</span>
+            </div>
+            <div class="modal-body">
+                <img src="../img/Conductor1.png" class="imageModal" alt="conductor">
+                <div class="personalInformation">
+                    <h3>Datos importantes</h3>
+                    <label for=""><strong>Nombres y Apellido </strong></label>
+                    <label for="">Alipio Gonzales Apaza</label>
+                    <label for=""><strong>DNI </strong></label>
+                    <label for="">42635156</label>
+                    <label for=""><strong>Placa</strong></label>
+                    <label for="">ABC 123</label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--modal cobrador-->
+    <div class="modal" id="modalCobrador">
+        <div class="modal-content">
+            <div class="modal-header">
+                Cobrador de la unidad Nro: 56
+                <span class="close" id="close4">&times;</span>
+            </div>
+            <div class="modal-body">
+                <img src="../img/conductor2.jpg" class="imageModal" alt="conductor">
+                <div class="personalInformation">
+                    <h3>Datos importantes</h3>
+                    <label><strong>Nombres y Apellido</strong></label>
+                    <label>Juan Gozales Apaza</label>
+                    <label><strong>DNI</strong></label>
+                    <label>42635156</label>
+                    <label><strong>Placa</strong></label>
+                    <label>ABC 123</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="controlar.js"></script>
+    <script src="https://kit.fontawesome.com/74ef1d0087.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
