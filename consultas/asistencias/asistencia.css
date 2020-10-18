@@ -334,11 +334,6 @@ th span {
     transform: rotate(-180deg);
 }
 
-
-/*tr:nth-child(even) {
-    background-color: #f2f2f2;
-}*/
-
 .table-sortable th {
     cursor: pointer;
 }

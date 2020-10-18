@@ -77,7 +77,7 @@ body {
     display: none;
 }
 
-.dropdown {
+.dropdown1 {
     /*float: left;  AQUI  */
     overflow: hidden;
 }
@@ -90,7 +90,7 @@ body {
     float: right;
 }
 
-.dropdown .dropbtn {
+.dropdown1 .dropbtn {
     font-size: 17px;
     border: none;
     outline: none;
@@ -120,7 +120,7 @@ body {
 }
 
 .topnav a:hover,
-.dropdown:hover .dropbtn {
+.dropdown1:hover .dropbtn {
     border-radius: 25px;
     background-color: #ffffff;
     color: black;
@@ -131,7 +131,7 @@ body {
     color: black;
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown1:hover .dropdown-content {
     display: block;
 }
 
@@ -223,7 +223,7 @@ a {
         padding: 0;
     }
     .topnav a:not(:first-child),
-    .dropdown .dropbtn {
+    .dropdown1 .dropbtn {
         display: none;
         text-align: center;
         margin: 0;
@@ -255,7 +255,7 @@ a {
         text-align: center;
         margin: 0;
     }
-    .topnav.responsive .dropdown {
+    .topnav.responsive .dropdown1 {
         float: none;
         text-align: center;
     }
@@ -267,7 +267,7 @@ a {
         /*aqui*/
         margin: 0;
     }
-    .topnav.responsive .dropdown .dropbtn {
+    .topnav.responsive .dropdown1 .dropbtn {
         display: block;
         width: 100%;
         text-align: center;

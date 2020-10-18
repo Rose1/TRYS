@@ -196,6 +196,7 @@ body {
 
 .time-control .card-body {
     height: 52vh;
+    padding-top: 0;
 }
 
 
@@ -221,7 +222,7 @@ body {
 }
 
 .time-control .card-header a {
-    font-size: 19px;
+    font-size: 20px;
     color: #2196F3;
     text-align: right;
 }
@@ -230,10 +231,6 @@ body {
     /*width: 30%;*/
     float: left;
     vertical-align: middle;
-}
-
-.time-control .card-body {
-    padding-top: 0;
 }
 
 .time-control input[type='checkbox'] {
@@ -318,7 +315,6 @@ table {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
-    /*overflow-y: auto;*/
     position: relative;
 }
 
@@ -328,8 +324,7 @@ th {
     position: sticky;
     top: 0;
     border: 1px solid #dddddd;
-    /*position: -webkit-sticky;*/
-    box-shadow: 2px 2px -1px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
 }
 
 td,
@@ -342,6 +337,23 @@ th {
 th span {
     writing-mode: vertical-lr;
     transform: rotate(-180deg);
+}
+
+.table-sortable th {
+    cursor: pointer;
+}
+
+.table-sortable .th-sort-asc::after {
+    content: "\25b4";
+}
+
+.table-sortable .th-sort-desc::after {
+    content: "\25be";
+}
+
+.table-sortable .th-sort-asc::after,
+.table-sortable .th-sort-desc::after {
+    margin-left: 5px;
 }
 
 
@@ -466,19 +478,22 @@ th span {
 }
 
 .right-side {
+    display: flex;
     float: right;
     right: 0;
+    /*text-align: right;*/
     vertical-align: middle;
     margin: 0;
+    justify-content: flex-end;
 }
 
 .right-side input,
 .right-side a {
-    margin-left: 10px;
+    margin: 3px 0 3px 10px;
 }
 
 .right-side select {
-    margin-left: 10px;
+    margin: 3px 0 3px 10px;
 }
 
 .right-side a {
@@ -817,7 +832,7 @@ div .modal-footer .button .is-white {
 }
 
 .dropdown__menu_item:hover {
-    background-color: #eee;
+    background-color: rgb(146, 200, 236);
 }
 
 .dropdown__menu_item.selected,
@@ -839,3 +854,157 @@ div .modal-footer .button .is-white {
 
 
 /*------------fin estilos dropdown buscar bus-------------*/
+
+
+/*----------------RESPONSIVE STYLES-------------------*/
+
+@media screen and (max-width: 530px) {
+    .modal {
+        padding-top: 10%;
+    }
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        /* 15% from the top and centered */
+        border: 1px solid #888;
+        width: 80%;
+        border-radius: 5px;
+        /* Could be more or less, depending on screen size */
+    }
+    .card-header h4 {
+        width: 100%;
+        text-align: left;
+    }
+    .card-header {
+        display: inline-block;
+    }
+    .time-control {
+        width: 100%;
+        display: block;
+        overflow: hidden;
+        height: 100%;
+    }
+    .departures {
+        width: 100%;
+        display: block;
+    }
+    .flex {
+        display: block;
+    }
+    .image {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1020px) {
+    body {
+        overflow-y: scroll;
+    }
+    .container-navbar {
+        padding: 0;
+    }
+    .topnav a:not(:first-child),
+    .dropdown1 .dropbtn {
+        display: none;
+        text-align: center;
+        margin: 0;
+    }
+    .topnav a.icon {
+        float: right;
+        display: block;
+    }
+    .dropdown-content a {
+        text-align: center;
+    }
+    .scrollTable {
+        height: 100%;
+    }
+    .time-control {
+        width: 100%;
+        display: block;
+        overflow: hidden;
+    }
+    .departures {
+        width: 100%;
+        display: block;
+    }
+    .flex {
+        display: block;
+    }
+    .image {
+        width: 100%;
+    }
+    .time-control .card-body {
+        height: 80vh;
+    }
+    .bus-info .card-body {
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 1020px) {
+    body {
+        overflow-y: scroll;
+    }
+    .container-navbar {
+        padding: 0;
+    }
+    .topnav.responsive {
+        position: relative;
+    }
+    .topnav.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: center;
+        margin: 0;
+    }
+    .topnav.responsive .dropdown1 {
+        float: none;
+        text-align: center;
+    }
+    .topnav.responsive .dropdown-content {
+        position: relative;
+    }
+    .topnav.responsive .dropdown-content a {
+        text-align: center;
+        /*aqui*/
+        margin: 0;
+    }
+    .topnav.responsive .dropdown1 .dropbtn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        /*aqui*/
+        margin: 0;
+    }
+    .time-control {
+        display: block;
+        overflow-y: scroll;
+        width: 100%;
+    }
+    .departures {
+        width: 100%;
+        display: block;
+    }
+    .flex {
+        display: block;
+    }
+    .image {
+        width: 100%;
+        margin: 5px 0;
+    }
+    .time-control .card-body {
+        height: 80vh;
+    }
+    .bus-info .card-body {
+        height: auto;
+    }
+}
+
+
+/*------------------FIN RESPONSIVE STYLES-------------------*/

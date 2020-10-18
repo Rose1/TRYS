@@ -16,9 +16,6 @@ document.getElementById('currentDate').innerHTML = day + '/' + month + '/' + yea
         var min = formatTime(today.getMinutes());
         var seg = formatTime(today.getSeconds());
         document.getElementById("box-time").innerHTML = hour + ":" + min + ":" + seg;
-        //document.getElementById('hour').val = hour + ":" + min;
-        //document.getElementById('hour2').nodeValue = hour + ":" + min + ":" + seg;
-        // console.log(day + '/' + month + '/' + year);
         var d = setTimeout(function() {
             checkTime()
         }, 500);
@@ -127,6 +124,7 @@ const form = document.querySelector('form');
 
 // verificar si el dropdown existe
 if (dropdowns.length > 0) {
+    console.log(dropdowns.length);
     // recorrer el dropdown y crear los estilos para cada item del dropdown
     dropdowns.forEach(dropdown => {
         createCustomDropdown(dropdown);
@@ -274,3 +272,130 @@ function closeIfClickedOutside(menu, e) {
         menu.style.display = 'none';
     }
 }
+
+
+/*--------------------ORDENAR TABLA POR COLUMNAS-----------------------*/
+function sortTableByColumn(table, column, asc = true) {
+    const dirModifier = asc ? 1 : -1;
+    const tBody = table.tBodies[0];
+    const rows = Array.from(tBody.querySelectorAll("tr"));
+
+    // ORDENAR CADA FILA
+    const sortedRows = rows.sort((a, b) => {
+        const aColText = a.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
+        const bColText = b.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
+
+        return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
+    });
+
+    // Remove all existing TRs from the table
+    while (tBody.firstChild) {
+        tBody.removeChild(tBody.firstChild);
+    }
+
+    // Re-add the newly sorted rows
+    tBody.append(...sortedRows);
+    console.log('Estas aqui----------------------');
+
+    // Remember how the column is currently sorted
+    table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
+    table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-asc", asc);
+    table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-desc", !asc);
+}
+
+document.querySelectorAll(".table-sortable th").forEach(headerCell => {
+    headerCell.addEventListener("click", () => {
+        const tableElement = headerCell.parentElement.parentElement.parentElement;
+        const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
+        const currentIsAscending = headerCell.classList.contains("th-sort-asc");
+
+        sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
+    });
+});
+
+
+
+/*-------------------BUSCAR EN LA TABLA--------------------- */
+const tableData = () => {
+    const searchData = [];
+    const tableEl = document.getElementById('data-table');
+    Array.from(tableEl.children[1].children).forEach(_bodyRowEl => {
+        searchData.push(Array.from(_bodyRowEl.children).map(_cellEl => {
+            return _cellEl.innerHTML;
+        }));
+    });
+
+    return searchData;
+}
+
+const search = (arr, searchTerm) => {
+    if (!searchTerm) return arr;
+    return arr.filter(_row => {
+        return _row.find(_item => _item.toLowerCase()
+            .includes(searchTerm.toLowerCase()));
+    });
+}
+
+const refreshTable = (data) => {
+    const tableBody = document.getElementById('data-table').children[1];
+    tableBody.innerHTML = '';
+
+    data.forEach(_row => {
+        const curRow = document.createElement('tr');
+        for (i = 0; i < _row.length; i++) {
+            const curCell = document.createElement('td');
+            if (i == 0) {
+                //const curCell = document.createElement('td');
+                var checkBox = document.createElement('input');
+                // assign attributes
+                checkBox.type = "checkbox";
+                checkBox.name = "check";
+                checkBox.id = "child_chkbx";
+                curCell.appendChild(checkBox);
+                curRow.appendChild(curCell);
+
+            } else {
+                if (i < 14) {
+                    //const curCell = document.createElement('td');
+                    curCell.innerText = _row[i];
+                    curRow.appendChild(curCell)
+                } else {
+                    if (i == 14) {
+                        var button = document.createElement('button');
+                        // assign attributes
+                        button.type = "button";
+                        var icon = document.createElement('i')
+                        icon.className = "fas fa-volume-up"
+                        button.appendChild(icon);
+                        curCell.appendChild(button);
+                        curRow.appendChild(curCell);
+
+                    } else {
+                        var button = document.createElement('button');
+                        // add atributes
+                        button.type = "button";
+                        button.innerText = "Ticket";
+                        curCell.appendChild(button);
+                        curRow.appendChild(curCell);
+
+                    }
+                }
+
+            }
+        }
+        tableBody.appendChild(curRow);
+    });
+}
+
+const init = () => {
+
+    const initialTableData = tableData();
+
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('keyup', (e) => {
+        console.log(search(initialTableData, e.target.value))
+        refreshTable(search(initialTableData, e.target.value));
+        selectRow();
+    });
+}
+init();

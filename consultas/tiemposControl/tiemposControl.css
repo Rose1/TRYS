@@ -6,7 +6,8 @@
 
 p,
 h2,
-h3 {
+h3,
+h1 {
     margin: 0;
 }
 
@@ -14,14 +15,18 @@ h4 {
     margin: 4px;
 }
 
-input {
+input,
+select {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, FontAwesome;
     font-size: 15px;
+    border: black 1px solid;
+    border-radius: 5px;
 }
 
 button {
     cursor: pointer;
     outline: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 
@@ -75,7 +80,7 @@ body {
     display: none;
 }
 
-.dropdown {
+.dropdown1 {
     /*float: left;  AQUI  */
     overflow: hidden;
 }
@@ -88,7 +93,7 @@ body {
     float: right;
 }
 
-.dropdown .dropbtn {
+.dropdown1 .dropbtn {
     font-size: 17px;
     border: none;
     outline: none;
@@ -118,7 +123,7 @@ body {
 }
 
 .topnav a:hover,
-.dropdown:hover .dropbtn {
+.dropdown1:hover .dropbtn {
     border-radius: 25px;
     background-color: #ffffff;
     color: black;
@@ -129,7 +134,7 @@ body {
     color: black;
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown1:hover .dropdown-content {
     display: block;
 }
 
@@ -139,120 +144,12 @@ body {
 }
 
 
-/*--------------MODAL STYLES--------------------*/
-
-
-/* The Modal (background) */
-
-.modal {
-    display: none;
-    /* Hidden by default */
-    position: fixed;
-    /* Stay in place */
-    z-index: 1;
-    /*padding-top: 20px;*/
-    /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    /* Full width */
-    height: 100%;
-    /* Full height */
-    overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
-    /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
-}
-
-
-/* Modal Content/Box */
-
-.modal-content {
-    background-color: #ffffff;
-    margin: 30px auto;
-    /* 15% from the top and centered */
-    border: 1px solid #888;
-    /* width: 80%;*/
-    width: 400px;
-    border-radius: 5px;
-    /* Could be more or less, depending on screen size */
-}
-
-
-/* modal header*/
-
-.modal-header {
-    font-size: 24px;
-    padding: 15px;
-    top: 0%;
-    height: 10%;
-    border-bottom: 1px solid #cacaca;
-    color: black;
-}
-
-
-/* modal body */
-
-.modal-body {
-    padding: 15px;
-    top: 0%;
-    height: 80%;
-    overflow: auto;
-}
-
-
-/* Modal footer */
-
-.modal-footer {
-    border-top: 1px solid #cacaca;
-    padding: 15px;
-    top: 0%;
-    height: 10%;
-    text-align: right;
-}
-
-
-/* The Close Button */
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-div .button i {
-    margin: 2px;
-}
-
-
-/*div .modal-footer .button .is-white {
-    color: #209cee;
-}*/
-
-
 /*----------------FORM STYLES------------------*/
 
 .form-group {
     width: 100%;
     margin-bottom: 10px;
 }
-
-
-/*.form-group select {
-    display: block;
-    width: 100%;
-    height: 30px;
-}*/
 
 .label-style {
     display: block;
@@ -276,19 +173,31 @@ div .button i {
 /*---------time control styles-------*/
 
 .time-control {
-    width: 70%;
+    width: 75%;
     float: left;
 }
 
 .time-control .card-body {
     height: 77vh;
+    padding-top: 0;
+}
+
+.time-control .card-header a {
+    font-size: 20px;
+    color: #2196F3;
+    text-align: right;
+}
+
+.time-control input[type='checkbox'] {
+    width: 17px;
+    height: 17px;
 }
 
 
 /*-------query styles---------*/
 
 .query {
-    width: 29%;
+    width: 24%;
     margin-left: 1%;
     float: right;
 }
@@ -326,6 +235,7 @@ div .button i {
 .card-footer {
     padding: 10px;
     border-top: 1px solid #cacaca;
+    text-align: right;
 }
 
 
@@ -335,35 +245,77 @@ table {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
-    overflow-y: auto;
+    position: relative;
+}
+
+th {
+    background: white;
+    color: #000000;
+    position: sticky;
+    top: 0;
+    border: 1px solid #dddddd;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
 }
 
 td,
 th {
     border: 1px solid #dddddd;
     text-align: center;
-    padding: 10px;
-    position: relative;
+    padding: 7px;
 }
 
 th span {
     writing-mode: vertical-lr;
     transform: rotate(-180deg);
-    /*transform-origin: 0 50%;
-    transform: rotate(-90deg);
-    white-space: nowrap;
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 50%;*/
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+.table-sortable th {
+    cursor: pointer;
+}
+
+.table-sortable .th-sort-asc::after {
+    content: "\25b4";
+}
+
+.table-sortable .th-sort-desc::after {
+    content: "\25be";
+}
+
+.table-sortable .th-sort-asc::after,
+.table-sortable .th-sort-desc::after {
+    margin-left: 5px;
 }
 
 
 /*--------------ANOTHER STYLES----------------*/
+
+.flex {
+    display: flex;
+    flex-direction: row;
+}
+
+.right-side {
+    display: flex;
+    float: right;
+    right: 0;
+    /*text-align: right;*/
+    vertical-align: middle;
+    margin: 0;
+    justify-content: flex-end;
+}
+
+.right-side input,
+.right-side a {
+    margin: 3px 0 3px 10px;
+}
+
+.right-side select {
+    margin: 3px 0 3px 10px;
+}
+
+.right-side a {
+    margin-right: 0;
+}
 
 .scrollTable {
     height: 520px;
@@ -380,6 +332,11 @@ tr:nth-child(even) {
 .right-header a {
     margin: 4px;
     height: 31px;
+}
+
+.custom-select select {
+    height: 30px;
+    width: 150px;
 }
 
 
@@ -427,6 +384,118 @@ tr:nth-child(even) {
 }
 
 
+/*------------estilos dropdown buscar bus-------------*/
+
+.form {
+    padding: 0px;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown__selected {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 35px;
+    padding: 0 20px 0 10px;
+    font-size: 14px;
+    border: 1px solid black;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    transition: box-shadow .3s ease;
+}
+
+.dropdown__selected::after {
+    top: calc(50% - 2px);
+    right: 10px;
+    border: solid transparent;
+    content: '';
+    height: 0;
+    width: 0;
+    position: absolute;
+    border-top-color: #000;
+    border-width: 4px;
+    margin-left: -4px;
+}
+
+.dropdown__selected:hover {
+    box-shadow: 0 0 5px rgba(28, 173, 230, 0.9);
+}
+
+.dropdown__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    border: 1px solid #eee;
+    border-top: 0;
+    background-color: #fff;
+    z-index: 5;
+    display: none;
+}
+
+.dropdown__menu_items {
+    max-height: 210px;
+    overflow-y: auto;
+}
+
+.dropdown__menu_search {
+    display: block;
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid #eee;
+    padding: 12px;
+    outline: 0;
+    background-color: #f9f9f9;
+}
+
+.dropdown__menu_item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.dropdown__menu_item:last-child {
+    border-bottom: 0;
+}
+
+.dropdown__menu_item:hover {
+    background-color: rgb(146, 200, 236);
+}
+
+.dropdown__menu_item.selected,
+.dropdown__menu_item.selected:hover {
+    background-color: #10b0e0;
+    color: #fff;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #10b0e0;
+    color: #fff;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+}
+
+
+/*------------fin estilos dropdown buscar bus-------------*/
+
+
+/*---------------estilos relect row-----------------*/
+
+.checked {
+    background-color: #931a25;
+    color: #ffffff;
+}
+
+
 /*---------------RESPONSIVE STYLES ------------------------*/
 
 @media screen and (max-width: 530px) {
@@ -458,6 +527,9 @@ tr:nth-child(even) {
     .card-header .right {
         width: 100%;
     }
+    .flex {
+        display: block;
+    }
 }
 
 @media screen and (max-width: 1020px) {
@@ -468,7 +540,7 @@ tr:nth-child(even) {
         padding: 0;
     }
     .topnav a:not(:first-child),
-    .dropdown .dropbtn {
+    .dropdown1 .dropbtn {
         display: none;
         text-align: center;
         margin: 0;
@@ -491,6 +563,12 @@ tr:nth-child(even) {
     .query {
         width: 100%;
         display: block;
+    }
+    .flex {
+        display: block;
+    }
+    .time-control .card-body {
+        height: 80vh;
     }
 }
 
@@ -515,9 +593,12 @@ tr:nth-child(even) {
         text-align: center;
         margin: 0;
     }
-    .topnav.responsive .dropdown {
+    .topnav.responsive .dropdown1 {
         float: none;
         text-align: center;
+    }
+    .flex {
+        display: block;
     }
     .topnav.responsive .dropdown-content {
         position: relative;
@@ -527,7 +608,7 @@ tr:nth-child(even) {
         /*aqui*/
         margin: 0;
     }
-    .topnav.responsive .dropdown .dropbtn {
+    .topnav.responsive .dropdown1 .dropbtn {
         display: block;
         width: 100%;
         text-align: center;
@@ -536,5 +617,8 @@ tr:nth-child(even) {
     }
     .scrollTable {
         height: 100%;
+    }
+    .time-control .card-body {
+        height: 80vh;
     }
 }

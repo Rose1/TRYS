@@ -67,7 +67,7 @@
                 <div class="card-header">
                     <h4>Tiempos de control</h4>
                     <div class="right-side flex">
-                        <input type="text" placeholder="Buscar...">
+                        <input type="text" name="search" id="searchInput" placeholder="Buscar...">
                         <div class="custom-select">
                             <select name="filterBy" id="filterBy">
                                 <option>Filtrar por</option>
@@ -83,25 +83,27 @@
                     </div>
                 </div>
                 <div class="card-body" id="table-container" style="overflow-x: auto;">
-                    <table id="data-table">
-                        <tr>
-                            <th><input type="checkbox"></th>
-                            <th><span>Nro. Bus</span></th>
-                            <th><span>Vuelta</span></th>
-                            <th><span>Partida</span></th>
-                            <th><span>Point 1</span></th>
-                            <th><span>Point 2</span></th>
-                            <th><span>Point 3</span></th>
-                            <th><span>Point 4</span></th>
-                            <th><span>Point 5</span></th>
-                            <th><span>Point 6</span></th>
-                            <th><span>Point 6</span></th>
-                            <th><span>Point 8</span></th>
-                            <th><span>Point 9</span></th>
-                            <th><span>Suma</span></th>
-                            <th><span>Acción</span></th>
-                            <th><span>Tickets</span></th>
-                        </tr>
+                    <table id="data-table" class="table-sortable">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox"></th>
+                                <th><span>Nro. Bus</span></th>
+                                <th><span>Vuelta</span></th>
+                                <th><span>Partida</span></th>
+                                <th><span>Point 1</span></th>
+                                <th><span>Point 2</span></th>
+                                <th><span>Point 3</span></th>
+                                <th><span>Point 4</span></th>
+                                <th><span>Point 5</span></th>
+                                <th><span>Point 6</span></th>
+                                <th><span>Point 6</span></th>
+                                <th><span>Point 8</span></th>
+                                <th><span>Point 9</span></th>
+                                <th><span>Suma</span></th>
+                                <th><span>Acción</span></th>
+                                <th><span>Tickets</span></th>
+                            </tr>
+                        </thead>
                         <tbody>
                             <tr>
                                 <td><input type="checkbox" name="check"></td>
@@ -350,8 +352,8 @@
                         </div>
                         <div class="form-group">
                             <label class="label-style">Punto de inicio </label>
-                            <input class="input-style" list="controlPoint" placeholder="Buscar punto de inicio">
-                            <datalist id="controlPoint">
+                            <select id="controlPoint" name="controlPoint" data-dropdown>
+                                <option>Seleccione una opción</option>
                                 <option>AAA</option>
                                 <option>BBB</option>
                                 <option>CCC</option>
@@ -364,7 +366,7 @@
                                 <option>CVH</option>
                                 <option>CUN</option>
                                 <option>KMD</option>
-                            </datalist>
+                            </select>
                         </div>
                     </form>
                 </div>
@@ -390,8 +392,8 @@
                     <label for=""><strong>Placa: ABC-723</strong></label>
                 </div>
                 <div class="card-body flex">
-                    <img src="../img/Conductor1.png" id="imageConductor" onclick="openModal('modalConductor')" class="image" alt="conductor">
-                    <img src="../img/conductor2.jpg" id="imageCobrador" onclick="openModal('modalCobrador')" class="image" alt="cobrador">
+                    <img src="../img/Conductor1.png" onclick="openModal('modalConductor')" class="image" alt="conductor">
+                    <img src="../img/conductor2.jpg" onclick="openModal('modalCobrador')" class="image" alt="cobrador">
                     <button type="button" class="tooltip">
                         <i class="fas fa-map-marker-alt fa-2x"></i>
                         <span class="toolTipText">Monitoreo</span>
@@ -449,28 +451,24 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="">Nro. de vehiculo </label>
-                    <input class="input-style" list="nroBusMessage" placeholder="Buscar vehículo...">
-                    <datalist id="nroBusMessage">
-                        <option>01</option>
-                        <option>02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option>
-                        <option value="06">06</option>
-                        <option>07</option>
-                        <option>08</option>
-                        <option>10</option>
-                        <option>15</option>
-                        <option>19</option>
-                        <option>20</option>
-                        <option>21</option>
-                        <option>22</option>
-                        <option>23</option>
-                        <option>24</option>
-                        <option>30</option>
-                        <option>35</option>
-                        <option>40</option>
-                    </datalist>
+                    <select id="nroVehiculo2" name="nroVehiculo2" data-dropdown>
+                        <option value="">Seleccione un número</option>
+                        <option value="001">001</option>
+                        <option value="002">002</option>
+                        <option value="003">003</option>
+                        <option value="004">004</option>
+                        <option value="005">005</option>
+                        <option value="007">007</option>
+                        <option value="011">011</option>
+                        <option value="019">019</option>
+                        <option value="023">023</option>
+                        <option value="024">024</option>
+                        <option value="025">025</option>
+                        <option value="036">036</option>
+                        <option value="037">037</option>
+                        <option value="058">058</option>
+                        <option value="040">040</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="date">Fecha </label>
@@ -491,8 +489,8 @@
                 </div>
                 <div class="form-group">
                     <label class="label-style">Punto de inicio </label>
-                    <input class="input-style" list="controlPoint" placeholder="Buscar punto de inicio">
-                    <datalist id="controlPoint">
+                    <select id="controlPoint" name="controlPoint" data-dropdown>
+                        <option>Seleccione una opción</option>
                         <option>AAA</option>
                         <option>BBB</option>
                         <option>CCC</option>
@@ -505,7 +503,7 @@
                         <option>CVH</option>
                         <option>CUN</option>
                         <option>KMD</option>
-                    </datalist>
+                    </select>
                 </div>
             </div>
             <div class="modal-footer">
@@ -531,33 +529,28 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="">Nro. de vehiculo: </label>
-                    <input class="input-style" list="nroBusMessage" placeholder="Buscar vehículo...">
-                    <datalist id="nroBusMessage">
-                        <option>01</option>
-                        <option>02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option>
-                        <option value="06">06</option>
-                        <option>07</option>
-                        <option>08</option>
-                        <option>10</option>
-                        <option>15</option>
-                        <option>19</option>
-                        <option>20</option>
-                        <option>21</option>
-                        <option>22</option>
-                        <option>23</option>
-                        <option>24</option>
-                        <option>30</option>
-                        <option>35</option>
-                        <option>40</option>
-                    </datalist>
-
+                    <select id="nroVehiculo2" name="nroVehiculo2" data-dropdown>
+                        <option value="">Seleccione un número</option>
+                        <option value="001">001</option>
+                        <option value="002">002</option>
+                        <option value="003">003</option>
+                        <option value="004">004</option>
+                        <option value="005">005</option>
+                        <option value="007">007</option>
+                        <option value="011">011</option>
+                        <option value="019">019</option>
+                        <option value="023">023</option>
+                        <option value="024">024</option>
+                        <option value="025">025</option>
+                        <option value="036">036</option>
+                        <option value="037">037</option>
+                        <option value="058">058</option>
+                        <option value="040">040</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="">Mensaje: </label>
-                    <textarea name="" id="" cols="30" rows="3"></textarea>
+                    <textarea name="" id="" cols="30" rows="5"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
