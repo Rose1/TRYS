@@ -16,7 +16,7 @@
         <div class="topnav" id="myTopnav">
             <a href="" class="left"><i class="fa fa-home"></i><strong> Inicio</strong></a>
             <a href="" class="left"><i class="fa fa-puzzle-piece"></i><strong> Procesos</strong></a>
-            <div class="dropdown left">
+            <div class="dropdown1 left">
                 <button class="dropbtn">
                 <i class="fa fa-search"></i><strong>Consultas</strong>
                 <i class="fa fa-caret-down"></i>
@@ -29,7 +29,7 @@
                     <a href="#"><i class="fas fa-wifi"></i> Conectados</a>
                 </div>
             </div>
-            <div class="dropdown left">
+            <div class="dropdown1 left">
                 <button class="dropbtn">
                 <i class="fa fa-cog"></i><strong> Configuración</strong>
                 <i class="fa fa-caret-down"></i>
@@ -43,7 +43,7 @@
                     <a href="#" id="btnModalSendStations"><i class="fas fa-paper-plane"></i> Enviar paraderos</a>
                 </div>
             </div>
-            <div class="dropdown right">
+            <div class="dropdown1 right">
                 <button class="dropbtn">
                     <i class="fas fa-user"></i>
                     <strong>Admin AB</strong>
@@ -83,47 +83,53 @@
                     <strong>Monitorear vehículo</strong>
                 </div>
                 <div class="card-body">
-                    <div class="form-group">
-                        <label for="nroBus">Nro. de vehiculo: </label>
-                        <input class="input-style" list="nroBus" placeholder="Buscar vehículo...">
-                        <datalist id="nroBus">
-                            <option>01</option>
-                            <option>02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05">05</option>
-                            <option value="06">06</option>
-                            <option>07</option>
-                            <option>08</option>
-                            <option>10</option>
-                            <option>15</option>
-                            <option>19</option>
-                            <option>20</option>
-                            <option>21</option>
-                            <option>22</option>
-                            <option>23</option>
-                            <option>24</option>
-                            <option>30</option>
-                            <option>35</option>
-                            <option>40</option>
-                        </datalist>
-                    </div>
-                    <div class="form-group">
-                        <label for="nroVuelta">Nro. de vuelta</label>
-                        <input class="input-style" list="nroVuelta" placeholder="Buscar vehículo...">
-                        <datalist id="nroVuelta">
-                            <option>01</option>
-                            <option>02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05">05</option>
-                            <option value="06">06</option>
-                            
-                        </datalist>
-                    </div>
-                    <div class="form-group">
-                        <label class="label-style" for="">Fecha </label>
-                        <input class="input-style" id="currentDate" type="date" value="">
+                    <div class="form">
+                        <div class="form-group">
+                            <label class="label-style" for="nroVehiculo">Nro. de vehiculo: </label>
+                            <select id="nroVehiculo" name="nroVehiculo" data-dropdown>
+                                <option value="">Seleccione un número</option>
+                                <option value="001">001</option>
+                                <option value="002">002</option>
+                                <option value="003">003</option>
+                                <option value="004">004</option>
+                                <option value="005">005</option>
+                                <option value="007">007</option>
+                                <option value="011">011</option>
+                                <option value="019">019</option>
+                                <option value="023">023</option>
+                                <option value="024">024</option>
+                                <option value="025">025</option>
+                                <option value="036">036</option>
+                                <option value="037">037</option>
+                                <option value="058">058</option>
+                                <option value="040">040</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-style" for="nroVuelta">Nro. de vuelta</label>
+                            <select id="nroVuelta" name="nroVuelta" data-dropdown>
+                                <option value="">Seleccione un número</option>
+                                <option value="001">001</option>
+                                <option value="002">002</option>
+                                <option value="003">003</option>
+                                <option value="004">004</option>
+                                <option value="005">005</option>
+                                <option value="007">007</option>
+                                <option value="011">011</option>
+                                <option value="019">019</option>
+                                <option value="023">023</option>
+                                <option value="024">024</option>
+                                <option value="025">025</option>
+                                <option value="036">036</option>
+                                <option value="037">037</option>
+                                <option value="058">058</option>
+                                <option value="040">040</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-style" for="">Fecha </label>
+                            <input class="input-style" id="currentDate" type="date" value="">
+                        </div>
                     </div>
                 </div>
                 <div class="card-footer">
