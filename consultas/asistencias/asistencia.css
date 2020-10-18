@@ -501,14 +501,18 @@ th span {
         float: left;
         width: 100%;
     }
-    .card-header h4 {
+    /*.card-header h4 {
         width: 100%;
         text-align: left;
-    }
+    }*/
     .card-header {
         display: inline-block;
     }
     .flex {
+        display: block;
+    }
+    .right-side {
+        width: 100%;
         display: block;
     }
 }
