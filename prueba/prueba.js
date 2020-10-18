@@ -1,17 +1,18 @@
+/*--------Hour function--------*/
 (function() {
     function formatTime(n) {
         return (n < 10) ? "0" + n : n;
     };
 
     function checkTime() {
-        var today = new Date(),
-
-            h = formatTime(today.getHours()),
-            min = formatTime(today.getMinutes()),
-            seg = formatTime(today.getSeconds()),
-            hour = h
+        var today = new Date();
+        var hour = formatTime(today.getHours());
+        var min = formatTime(today.getMinutes());
+        var seg = formatTime(today.getSeconds());
         document.getElementById("box-time").innerHTML = hour + ":" + min + ":" + seg;
-
+        //document.getElementById('hour').val = hour + ":" + min;
+        //document.getElementById('hour2').nodeValue = hour + ":" + min + ":" + seg;
+        // console.log(day + '/' + month + '/' + year);
         var d = setTimeout(function() {
             checkTime()
         }, 500);
@@ -20,164 +21,157 @@
     checkTime();
 })();
 
-//*---------------menu responsive function---------------*/
-function hamburgerMenu() {
-    var x = document.getElementById("myTopnav");
-    if (x.className === "topnav") {
-        x.className += " responsive";
+
+// obtener el dropdown y el formulario
+const dropdowns = document.querySelectorAll('[data-dropdown]');
+const form = document.querySelector('form');
+
+// verificar si el dropdown existe
+if (dropdowns.length > 0) {
+    // recorrer el dropdown y crear los estilos para cada item del dropdown
+    dropdowns.forEach(dropdown => {
+        createCustomDropdown(dropdown);
+    });
+}
+
+// verificar si el formulario existe
+if (form !== null) {
+    // cuando se hace clic en el submit entonces imprimir en consola el valor seleccionado en
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        console.log('Selected country:', form.querySelector('[name="country"]').value);
+    });
+}
+
+// Crear el dropdown
+function createCustomDropdown(dropdown) {
+    // obtener todas las opciones y convertirlo de una lista de nodos a un array
+    const options = dropdown.querySelectorAll('option');
+    const optionsArr = Array.prototype.slice.call(options);
+
+    // crear el elemento dropdown y añadirle la clase dropdown
+    const customDropdown = document.createElement('div');
+    customDropdown.classList.add('dropdown');
+    // insetarlo en el DOM
+    dropdown.insertAdjacentElement('afterend', customDropdown);
+
+    // Crear el elemento para la opcion seleccionada
+    // Add class to this element, text from the first option in select field and append it to custom dropdown
+    const selected = document.createElement('div');
+    selected.classList.add('dropdown__selected');
+    selected.textContent = optionsArr[0].textContent;
+    customDropdown.appendChild(selected);
+
+    // Create element for dropdown menu, add class to it and append it to custom dropdown
+    // Add click event to selected element to toggle dropdown menu
+    const menu = document.createElement('div');
+    menu.classList.add('dropdown__menu');
+    customDropdown.appendChild(menu);
+    selected.addEventListener('click', toggleDropdown.bind(menu));
+
+    // Create serach input element
+    // Add class, type and placeholder to this element and append it to menu element
+    const search = document.createElement('input');
+    search.placeholder = 'Search...';
+    search.type = 'text';
+    search.classList.add('dropdown__menu_search');
+    menu.appendChild(search);
+
+    // Create wrapper element for menu items, add class to it and append to menu element
+    const menuItemsWrapper = document.createElement('div');
+    menuItemsWrapper.classList.add('dropdown__menu_items');
+    menu.appendChild(menuItemsWrapper);
+
+    // Loop through all options and create custom option for each option and append it to items wrapper element
+    // Add click event for each custom option to set clicked option as selected option
+    optionsArr.forEach(option => {
+        const item = document.createElement('div');
+        item.classList.add('dropdown__menu_item');
+        item.dataset.value = option.value;
+        item.textContent = option.textContent;
+        menuItemsWrapper.appendChild(item);
+
+        item.addEventListener('click', setSelected.bind(item, selected, dropdown, menu));
+    });
+
+    // Add selected class to first custom option
+    menuItemsWrapper.querySelector('div').classList.add('selected');
+
+    // Add input event to search input element to filter items
+    // Add click event to document element to close custom dropdown if clicked outside of it
+    // Hide original dropdown(select)
+    search.addEventListener('input', filterItems.bind(search, optionsArr, menu));
+    document.addEventListener('click', closeIfClickedOutside.bind(customDropdown, menu));
+    dropdown.style.display = 'none';
+}
+
+// deslizar o mostrar el dropdowwn
+function toggleDropdown() {
+    // Verificar si el dropdown esta abierto y si lo esta entonces cerrarlo
+    if (this.offsetParent !== null) {
+        this.style.display = 'none';
     } else {
-        x.className = "topnav";
+        // si no lo esta entonces abrirlo y poner el foco en en search input
+        this.style.display = 'block';
+        this.querySelector('input').focus();
     }
 }
 
-/*----------MAP---------- */
+// establecer la opcion seleccionada
+function setSelected(selected, dropdown, menu) {
+    // obtener el value de la etiqueta que fue seleccionada
+    const value = this.dataset.value;
+    const label = this.textContent;
 
-var myMap = L.map('mapid').setView([51.505, -0.09], 13)
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'your.mapbox.access.token'
-}).addTo(myMap);
+    // cambiar el label y value con la etiqueta seleccionada
+    selected.textContent = label;
+    dropdown.value = value;
 
-/*-------------MODAL-----------*/
-//  Modal add station
-var modalAddStation = document.getElementById("modalAddStation");
-var btnModalAddStation = document.getElementById("btnOpenModal");
-var span6 = document.getElementById("close1");
-btnModalAddStation.onclick = function() {
-    modalAddStation.style.display = "block";
-}
-span6.onclick = function() {
-    modalAddStation.style.display = "none";
-}
+    // cerrar el menu
+    menu.style.display = 'none';
+    // Reestalblecer el value input
+    menu.querySelector('input').value = '';
 
-//  Modal send configuration
-
-/*var modalSendInitialConfiguration = document.getElementById("modalSendInitialConf");
-var btnModalSendInitialConfiguration = document.getElementById("btnModalInitialConf");
-var span1 = document.getElementById("close2");
-btnModalSendInitialConfiguration.onclick = function() {
-    modalSendInitialConfiguration.style.display = "block";
-}
-span1.onclick = function() {
-    modalSendInitialConfiguration.style.display = "none";
-}
-window.onclick = function(event) {
-    if (event.target == modalSendInitialConfiguration) {
-        modalSendInitialConfiguration.style.display = "none";
-    }
-}
-
-//  Modal  SendControlPoints
-var modalSendControlPoints = document.getElementById("modalSendControlPoints");
-var btnModalSendControlPoints = document.getElementById("btnModalControlPoints");
-var span2 = document.getElementById("close3");
-btnModalSendControlPoints.onclick = function() {
-    modalSendControlPoints.style.display = "block";
-}
-span2.onclick = function() {
-    modalSendControlPoints.style.display = "none";
-}
-
-//  Modal  reset
-var modalReset = document.getElementById("modalSendReset");
-var btnModalReset = document.getElementById("btnModalReset");
-var span4 = document.getElementById("close4");
-btnModalReset.onclick = function() {
-    modalReset.style.display = "block";
-}
-span4.onclick = function() {
-    modalReset.style.display = "none";
-}
-
-//  Modal  change vehicle number
-var modalChangeVehicleNumber = document.getElementById("modalChangeNro");
-var btnModalChangeVehicleNumber = document.getElementById("btnModalChangeNro");
-var span5 = document.getElementById("close5");
-btnModalChangeVehicleNumber.onclick = function() {
-    modalChangeVehicleNumber.style.display = "block";
-}
-span5.onclick = function() {
-    modalChangeVehicleNumber.style.display = "none";
-}
-
-//  Modal send station
-var modalSendTariff = document.getElementById("modalSendStations");
-var btnModalSendTariff = document.getElementById("btnModalSendStations");
-var span3 = document.getElementById("close6");
-btnModalSendTariff.onclick = function() {
-    modalSendTariff.style.display = "block";
-}
-span3.onclick = function() {
-    modalSendTariff.style.display = "none";
-}
-
-
-//  Modal send station
-var modalSendStation = document.getElementById("modalSendStation");
-var btnModalSendStation = document.getElementById("btnOpenModalSendStations");
-var span7 = document.getElementById("close7");
-btnModalSendStation.onclick = function() {
-    modalSendStation.style.display = "block";
-}
-span7.onclick = function() {
-    modalSendStation.style.display = "none";
-}*/
-
-var screen = document.getElementById('screen')
-
-function openFullScreen() {
-    //alert('Hola');
-    if (screen.requestFullScreen) {
-        screen.requestFullScreen();
-    } else if (screen.mozRequestFullScreen) {
-        screen.mozRequestFullScreen();
-    } else if (screen.webkitRequestFullSreen) {
-        screen.webkitRequestFullSreen();
-    } else if (screen.msRequestFullScreen) {
-        screen.msRequestFullScreen();
-    }
-
-}
-
-/*function cancelFullScreen(el) {
-    var requestMethod = el.cancelFullScreen || el.webkitCancelFullScreen || el.mozCancelFullScreen || el.exitFullscreen;
-    if (requestMethod) { // cancel full screen.
-        requestMethod.call(el);
-    } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
-        var wscript = new ActiveXObject("WScript.Shell");
-        if (wscript !== null) {
-            wscript.SendKeys("{F11}");
+    menu.querySelectorAll('div').forEach(div => {
+        // borrar las clases que fueron seleccionadas anteriormente
+        if (div.classList.contains('selected')) {
+            div.classList.remove('selected');
+        } // Mostrar los divs que fueron filtrados
+        if (div.offsetParent === null) {
+            div.style.display = 'block';
         }
-    }
+    });
+    // Anadir la clase selected a la opcion clickeada
+    this.classList.add('selected');
 }
 
-function requestFullScreen(el) {
-    // Supports most browsers and their versions.
-    var requestMethod = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+// filtrar cada valor del select
+function filterItems(itemsArr, menu) {
+    // Obtener todos los items
+    const customOptions = menu.querySelectorAll('.dropdown__menu_items div');
+    // Obtener el value del search input y convertirlo a lower case
+    const value = this.value.toLowerCase();
+    // filtrar items
+    const filteredItems = itemsArr.filter(item => item.value.toLowerCase().includes(value));
+    // obtener los indices de los items filtrados
+    const indexesArr = filteredItems.map(item => itemsArr.indexOf(item));
 
-    if (requestMethod) { // Native full screen.
-        requestMethod.call(el);
-    } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
-        var wscript = new ActiveXObject("WScript.Shell");
-        if (wscript !== null) {
-            wscript.SendKeys("{F11}");
+    itemsArr.forEach(option => {
+        // Verificar si la opcion seleccionada no esta dentro de los indices del array y esconderlo
+        if (!indexesArr.includes(itemsArr.indexOf(option))) {
+            customOptions[itemsArr.indexOf(option)].style.display = 'none';
+        } else {
+            // si esta dentro de los indices pero escondido entonces mostrarlo
+            if (customOptions[itemsArr.indexOf(option)].offsetParent === null) {
+                customOptions[itemsArr.indexOf(option)].style.display = 'block';
+            }
         }
-    }
-    return false
+    });
 }
 
-function toggleFull() {
-    var elem = document.getElementById('screen'); // Make the body go full screen.
-    var isInFullScreen = (document.fullScreenElement && document.fullScreenElement !== null) || (document.mozFullScreen || document.webkitIsFullScreen);
-
-    if (isInFullScreen) {
-        cancelFullScreen(document);
-    } else {
-        requestFullScreen(elem);
+// Cerrar dropdown si se hace click fuera de el
+function closeIfClickedOutside(menu, e) {
+    if (e.target.closest('.dropdown') === null && e.target !== this && menu.offsetParent !== null) {
+        menu.style.display = 'none';
     }
-    return false;
-}*/
+}

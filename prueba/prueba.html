@@ -4,10 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configuración</title>
-    <link rel="stylesheet" type="text/css" href="prueba.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
-
+    <link rel="stylesheet" href="prueba.css">
+    <title>Document</title>
 </head>
 
 <body>
@@ -16,7 +14,7 @@
         <div class="topnav" id="myTopnav">
             <a href="" class="left"><i class="fa fa-home"></i><strong> Inicio</strong></a>
             <a href="" class="left"><i class="fa fa-puzzle-piece"></i><strong> Procesos</strong></a>
-            <div class="dropdown left">
+            <div class="dropdown1 left">
                 <button class="dropbtn">
                 <i class="fa fa-search"></i><strong>Consultas</strong>
                 <i class="fa fa-caret-down"></i>
@@ -29,7 +27,7 @@
                     <a href="#"><i class="fas fa-wifi"></i> Conectados</a>
                 </div>
             </div>
-            <div class="dropdown left">
+            <div class="dropdown1 left">
                 <button class="dropbtn">
                 <i class="fa fa-cog"></i><strong> Configuración</strong>
                 <i class="fa fa-caret-down"></i>
@@ -43,7 +41,7 @@
                     <a href="#" id="btnModalSendStations"><i class="fas fa-paper-plane"></i> Enviar paraderos</a>
                 </div>
             </div>
-            <div class="dropdown right">
+            <div class="dropdown1 right">
                 <button class="dropbtn">
                     <i class="fas fa-user"></i>
                     <strong>Admin AB</strong>
@@ -60,11 +58,56 @@
             <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="hamburgerMenu()">&#9776;</a>
         </div>
     </div>
-    <!-- CONTENT -->
 
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Partida programada
+            </div>
+            <div class="card-body">
+                <form class="form">
+                    <div class="form__group">
+                        <label for="country">Countries</label>
+                        <select id="country" name="country" data-dropdown>
+                              <option value="">Please select a number</option>
+                              <option value="001">001</option>
+                              <option value="002">002</option>
+                              <option value="003">003</option>
+                              <option value="004">004</option>
+                              <option value="005">005</option>
+                              <option value="007">007</option>
+                              <option value="011">011</option>
+                              <option value="019">019</option>
+                              <option value="023">023</option>
+                              <option value="024">024</option>
+                              <option value="025">025</option>
+                              <option value="036">036</option>
+                              <option value="037">037</option>
+                              <option value="058">058</option>
+                              <option value="040">040</option>
+                            </select>
+                    </div>
+                    <div>
+                        <label for="">label 1</label>
+                    </div>
+                    <div>
+                        <label for="">label 2</label>
+                    </div>
+                    <button type="submit" class="btn">Submit</button>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button>
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </div>
 
-    <script src="https://kit.fontawesome.com/74ef1d0087.js" crossorigin="anonymous"></script>
     <script src="prueba.js"></script>
+    <script src="https://kit.fontawesome.com/74ef1d0087.js" crossorigin="anonymous"></script>
+
+
 </body>
 
 </html>

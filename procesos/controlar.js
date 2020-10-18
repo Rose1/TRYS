@@ -16,7 +16,7 @@ document.getElementById('currentDate').innerHTML = day + '/' + month + '/' + yea
         var min = formatTime(today.getMinutes());
         var seg = formatTime(today.getSeconds());
         document.getElementById("box-time").innerHTML = hour + ":" + min + ":" + seg;
-        document.getElementById('hour').val = hour + ":" + min;
+        //document.getElementById('hour').val = hour + ":" + min;
         //document.getElementById('hour2').nodeValue = hour + ":" + min + ":" + seg;
         // console.log(day + '/' + month + '/' + year);
         var d = setTimeout(function() {
@@ -29,7 +29,7 @@ document.getElementById('currentDate').innerHTML = day + '/' + month + '/' + yea
 
 /*-------set input date--------*/
 
-function setInputDate(_id) {
+/*function setInputDate(_id) {
     var _dat = document.querySelector(_id);
     var hoy = new Date(),
         d = hoy.getDate(),
@@ -48,7 +48,7 @@ function setInputDate(_id) {
     console.log(data);
     _dat.value = data;
 };
-setInputDate("#dateDefault");
+setInputDate("#dateDefault");*/
 
 /*-------set input time--------*/
 // funcion que actualiza la hora
@@ -92,43 +92,69 @@ function hamburgerMenu() {
     }
 }
 
-/*--------------search a bus-----------------*/
-// Get dropdowns and form
+/*-------------select row--------------*/
+function selectRow() {
+    var checkBoxes = document.getElementsByName('check');
+    checkBoxes.forEach(check => {
+        check.onclick = function() {
+            if (this.checked) {
+                check.parentElement.parentElement.classList.add('checked');
+            } else {
+                check.parentElement.parentElement.classList.remove('checked');
+            }
+        }
+    });
+}
+selectRow();
+
+/*---------------abrir modal-----------------------*/
+function openModal(idModal) {
+    document.getElementById(idModal).style.display = "block";
+
+}
+
+/*------------------cerrar modal-----------------------*/
+function closeModal(idModal) {
+    document.getElementById(idModal).style.display = "none";
+
+}
+
+/*--------------------search a vehicle---------------------- */
+
+// obtener el dropdown y el formulario
 const dropdowns = document.querySelectorAll('[data-dropdown]');
 const form = document.querySelector('form');
 
-// Check if dropdowns exist on page
+// verificar si el dropdown existe
 if (dropdowns.length > 0) {
-    // Loop through dropdowns and create custom dropdown for each select element
+    // recorrer el dropdown y crear los estilos para cada item del dropdown
     dropdowns.forEach(dropdown => {
         createCustomDropdown(dropdown);
     });
 }
 
-
-// Check if form element exist on page
+// verificar si el formulario existe
 if (form !== null) {
-    // When form is submitted console log the value of the select field
+    // cuando se hace clic en el submit entonces imprimir en consola el valor seleccionado en
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        console.log('Bus seleccionado:', form.querySelector('[name="busOptions"]').value);
+        console.log('Selected country:', form.querySelector('[name="country"]').value);
     });
 }
 
-// create the custom dropdown
-
+// Crear el dropdown
 function createCustomDropdown(dropdown) {
-    // Get all options and convert them from nodelist to array
+    // obtener todas las opciones y convertirlo de una lista de nodos a un array
     const options = dropdown.querySelectorAll('option');
     const optionsArr = Array.prototype.slice.call(options);
 
-    // Create custom dropdown element and add class dropdown to it
-    // Insert it in the DOM after the select field
+    // crear el elemento dropdown y añadirle la clase dropdown
     const customDropdown = document.createElement('div');
     customDropdown.classList.add('dropdown');
+    // insetarlo en el DOM
     dropdown.insertAdjacentElement('afterend', customDropdown);
 
-    // Create element for selected option
+    // Crear el elemento para la opcion seleccionada
     // Add class to this element, text from the first option in select field and append it to custom dropdown
     const selected = document.createElement('div');
     selected.classList.add('dropdown__selected');
@@ -145,7 +171,7 @@ function createCustomDropdown(dropdown) {
     // Create serach input element
     // Add class, type and placeholder to this element and append it to menu element
     const search = document.createElement('input');
-    search.placeholder = 'Buscar...';
+    search.placeholder = 'Search...';
     search.type = 'text';
     search.classList.add('dropdown__menu_search');
     menu.appendChild(search);
@@ -154,7 +180,6 @@ function createCustomDropdown(dropdown) {
     const menuItemsWrapper = document.createElement('div');
     menuItemsWrapper.classList.add('dropdown__menu_items');
     menu.appendChild(menuItemsWrapper);
-
 
     // Loop through all options and create custom option for each option and append it to items wrapper element
     // Add click event for each custom option to set clicked option as selected option
@@ -177,65 +202,65 @@ function createCustomDropdown(dropdown) {
     search.addEventListener('input', filterItems.bind(search, optionsArr, menu));
     document.addEventListener('click', closeIfClickedOutside.bind(customDropdown, menu));
     dropdown.style.display = 'none';
-
 }
 
-// Toggle dropdown
+// deslizar o mostrar el dropdowwn
 function toggleDropdown() {
-    // Check if dropdown is opened and if it is close it, otherwise open it and focus search input
+    // Verificar si el dropdown esta abierto y si lo esta entonces cerrarlo
     if (this.offsetParent !== null) {
         this.style.display = 'none';
     } else {
+        // si no lo esta entonces abrirlo y poner el foco en en search input
         this.style.display = 'block';
         this.querySelector('input').focus();
     }
 }
 
-// Set selected option
+// establecer la opcion seleccionada
 function setSelected(selected, dropdown, menu) {
-    // Get value and label from clicked custom option
+    // obtener el value de la etiqueta que fue seleccionada
     const value = this.dataset.value;
     const label = this.textContent;
 
-    // Change the text on selected element
-    // Change the value on select field
+    // cambiar el label y value con la etiqueta seleccionada
     selected.textContent = label;
     dropdown.value = value;
 
-    // Close the menu
-    // Reset search input value
-    // Remove selected class from previously selected option and show all divs if they were filtered
-    // Add selected class to clicked option
+    // cerrar el menu
     menu.style.display = 'none';
+    // Reestalblecer el value input
     menu.querySelector('input').value = '';
+
     menu.querySelectorAll('div').forEach(div => {
+        // borrar las clases que fueron seleccionadas anteriormente
         if (div.classList.contains('selected')) {
             div.classList.remove('selected');
-        }
+        } // Mostrar los divs que fueron filtrados
         if (div.offsetParent === null) {
             div.style.display = 'block';
         }
     });
+    // Anadir la clase selected a la opcion clickeada
     this.classList.add('selected');
 }
 
-
-// Filter items
+// filtrar cada valor del select
 function filterItems(itemsArr, menu) {
-    // Get all custom options
-    // Get the value of search input and convert it to all lowercase characters
-    // Get filtered items
-    // Get the indexes of filtered items
+    // Obtener todos los items
     const customOptions = menu.querySelectorAll('.dropdown__menu_items div');
+    // Obtener el value del search input y convertirlo a lower case
     const value = this.value.toLowerCase();
+    // filtrar items
     const filteredItems = itemsArr.filter(item => item.value.toLowerCase().includes(value));
+    // obtener los indices de los items filtrados
     const indexesArr = filteredItems.map(item => itemsArr.indexOf(item));
 
-    // Check if option is not inside indexes array and hide it and if it is inside indexes array and it is hidden show it
     itemsArr.forEach(option => {
+        // Verificar si la opcion seleccionada no esta dentro de los indices del array y esconderlo
         if (!indexesArr.includes(itemsArr.indexOf(option))) {
             customOptions[itemsArr.indexOf(option)].style.display = 'none';
         } else {
+            // si esta dentro de los indices pero escondido entonces mostrarlo
             if (customOptions[itemsArr.indexOf(option)].offsetParent === null) {
                 customOptions[itemsArr.indexOf(option)].style.display = 'block';
             }
@@ -243,180 +268,9 @@ function filterItems(itemsArr, menu) {
     });
 }
 
-// Close dropdown if clicked outside dropdown element
+// Cerrar dropdown si se hace click fuera de el
 function closeIfClickedOutside(menu, e) {
     if (e.target.closest('.dropdown') === null && e.target !== this && menu.offsetParent !== null) {
         menu.style.display = 'none';
-    }
-}
-
-
-
-/*-------------select row--------------*/
-function selectRow() {
-    var checkBoxes = document.getElementsByName('check');
-    checkBoxes.forEach(check => {
-        check.onclick = function() {
-            if (this.checked) {
-                check.parentElement.parentElement.classList.add('checked');
-            } else {
-                check.parentElement.parentElement.classList.remove('checked');
-            }
-        }
-    });
-}
-selectRow();
-
-/*------------search in table----------*/
-
-
-const tableData = () => {
-    const searchData = [];
-    const tableEl = document.getElementById('data-table');
-    Array.from(tableEl.children[1].children).forEach(_bodyRowEl => {
-        searchData.push(Array.from(_bodyRowEl.children).map(_cellEl => {
-            return _cellEl.innerHTML;
-        }));
-    });
-
-    return searchData;
-}
-
-const search = (arr, searchTerm) => {
-    if (!searchTerm) return arr;
-    return arr.filter(_row => {
-        return _row.find(_item => _item.toLowerCase()
-            .includes(searchTerm.toLowerCase()));
-    });
-}
-
-const refreshTable = (data) => {
-    const tableBody = document.getElementById('data-table').children[1];
-    tableBody.innerHTML = '';
-
-    data.forEach(_row => {
-        const curRow = document.createElement('tr');
-        for (i = 0; i < _row.length; i++) {
-            if (i == 0) {
-                const curCell = document.createElement('td');
-                var checkBox = document.createElement('input');
-                // assign attributes
-                checkBox.type = "checkbox";
-                checkBox.name = "check";
-                checkBox.id = "child_chkbx";
-                curCell.appendChild(checkBox);
-                curRow.appendChild(curCell);
-
-            } else {
-                if (i < 14) {
-                    const curCell = document.createElement('td');
-                    curCell.innerText = _row[i];
-                    curRow.appendChild(curCell)
-                } else {
-                    if (i == 14) {
-                        const curCell = document.createElement('td');
-                        curCell.innerHTML = "<button><i class=" + 'fas fa-volume-up' + "></i></button>";
-                        curRow.appendChild(curCell);
-                    }
-                    if (i == 15) {
-                        const curCell = document.createElement('td');
-                        curCell.innerHTML = "<button>Ticket</button>";
-                        curRow.appendChild(curCell);
-                    }
-
-                }
-            }
-        }
-        tableBody.appendChild(curRow);
-    });
-}
-
-const init = () => {
-
-    const initialTableData = tableData();
-
-    const searchInput = document.getElementById('searchInput');
-    searchInput.addEventListener('keyup', (e) => {
-        console.log(search(initialTableData, e.target.value))
-        refreshTable(search(initialTableData, e.target.value));
-        selectRow();
-    });
-}
-init();
-
-
-/*-----------------Modal functions-----------------*/
-
-//  Modal Departure Programmed
-// get the modal
-var modalDepartureProgrammed = document.getElementById("programmedDeparture");
-// get the button that opens the modal
-var btnModalDepartureProgrammed = document.getElementById("btnDepartureProgrammed");
-// get the <span> element that closesthe modal
-var span1 = document.getElementById("close1");
-// button.click
-btnModalDepartureProgrammed.onclick = function() {
-        modalDepartureProgrammed.style.display = "block";
-    }
-    // close modal
-span1.onclick = function() {
-        modalDepartureProgrammed.style.display = "none";
-    }
-    // when the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modalDepartureProgrammed) {
-        modalDepartureProgrammed.style.display = "none";
-    }
-}
-
-//  Modal send message
-var modalSendMessage = document.getElementById("message");
-var buttonModalSendMessage = document.getElementById("btnMessage");
-var span2 = document.getElementById("close2");
-buttonModalSendMessage.onclick = function() {
-    modalSendMessage.style.display = "block";
-}
-span2.onclick = function() {
-    modalSendMessage.style.display = "none";
-}
-
-window.onclick = function(event) {
-    if (event.target == modalSendMessage) {
-        modalSendMessage.style.display = "none";
-    }
-}
-
-/*--------------------- modal conductor------------------*/
-var modalConductor = document.getElementById("modalConductor");
-var imageConductor = document.getElementById("imageConductor");
-var span3 = document.getElementById("close3");
-imageConductor.onclick = function() {
-    modalConductor.style.display = "block";
-}
-span3.onclick = function() {
-    modalConductor.style.display = "none";
-}
-
-window.onclick = function(event) {
-    if (event.target == modalConductor) {
-        modalConductor.style.display = "none";
-    }
-}
-
-/*--------------------- modal cobrador------------------*/
-
-var modalCobrador = document.getElementById("modalCobrador");
-var imageCobrador = document.getElementById("imageCobrador");
-var span4 = document.getElementById("close4");
-imageCobrador.onclick = function() {
-    modalCobrador.style.display = "block";
-}
-span4.onclick = function() {
-    modalCobrador.style.display = "none";
-}
-
-window.onclick = function(event) {
-    if (event.target == modalConductor) {
-        modalCobrador.style.display = "none";
     }
 }

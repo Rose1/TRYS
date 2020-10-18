@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="controlar.css">
     <title>Procesos-Controlar</title>
-    <link rel="stylesheet" type="text/css" href="controlar.css">
 
 </head>
 
@@ -15,7 +15,7 @@
         <div class="topnav" id="myTopnav">
             <a href="" class="left"><i class="fa fa-home"></i><strong> Inicio</strong></a>
             <a href="" class="left"><i class="fa fa-puzzle-piece"></i><strong> Procesos</strong></a>
-            <div class="dropdown left">
+            <div class="dropdown1 left">
                 <button class="dropbtn">
                 <i class="fa fa-search"></i><strong>Consultas</strong>
                 <i class="fa fa-caret-down"></i>
@@ -28,7 +28,7 @@
                     <a href="#"><i class="fas fa-wifi"></i> Conectados</a>
                 </div>
             </div>
-            <div class="dropdown left">
+            <div class="dropdown1 left">
                 <button class="dropbtn">
                 <i class="fa fa-cog"></i><strong> Configuración</strong>
                 <i class="fa fa-caret-down"></i>
@@ -42,7 +42,7 @@
                     <a href="#" id="btnModalSendStations"><i class="fas fa-paper-plane"></i> Enviar paraderos</a>
                 </div>
             </div>
-            <div class="dropdown right">
+            <div class="dropdown1 right">
                 <button class="dropbtn">
                     <i class="fas fa-user"></i>
                     <strong>Admin AB</strong>
@@ -60,27 +60,30 @@
         </div>
     </div>
 
-    <!--CONTENT-->
+    <!-- CONTENT -->
     <div class="container">
         <div class="time-control">
             <div class="card">
                 <div class="card-header">
                     <h4>Tiempos de control</h4>
-                    <div class="right-header">
-                        <label for="">Busqueda</label>
-                        <input type="text" name="search" id="searchInput" placeholder="Buscar">
-                        <label>Filtrar </label>
-                        <button class="is-secondary">Flota: 125</button>
-                        <button class="is-secondary">AB: 46</button>
-                        <button class="is-secondary">BA: 12</button>
-                        <button class="is-secondary">TermA: 12</button>
-                        <button class="is-secondary">TermB: 16</button>
-                        <a href=""><i class="fas fa-expand"></i></a>
-                    </div>
+                    <div class="right-side flex">
+                        <input type="text" placeholder="Buscar...">
+                        <div class="custom-select">
+                            <select name="filterBy" id="filterBy">
+                                <option>Filtrar por</option>
+                                <option>Flota: 125</option>
+                                <option>AB: 46</option>
+                                <option>BA: 35</option>
+                                <option>Term A: 5</option>
+                                <option>Term B: 6</option>
+                            </select>
+                        </div>
+                        <a><i class="fas fa-expand"></i></a>
 
+                    </div>
                 </div>
-                <div id="table-container" class="card-body" style="overflow-x: auto;">
-                    <table id="data-table" class="table-sortable">
+                <div class="card-body" id="table-container" style="overflow-x: auto;">
+                    <table id="data-table">
                         <tr>
                             <th><input type="checkbox"></th>
                             <th><span>Nro. Bus</span></th>
@@ -302,80 +305,78 @@
                     </table>
                 </div>
             </div>
+
         </div>
         <div class="departures">
             <div class="card">
                 <div class="card-header">
-                    <h4>Partidas</h4>
+                    <strong>Partida programada</strong>
                 </div>
                 <div class="card-body">
-                    <div class="form">
-                        <div class="form-group form__group">
-                            <label for="busOptions" class="label-style">Nro. de vehículo </label>
-                            <select name="busOptions" id="busOptions" data-dropdown>
-                                <option value="">Seleccione un nro. de bus</option>
-                                <option value="01">01</option>
-                                <option value="02">02</option>
-                                <option value="03">03</option>
-                                <option value="04">04</option>
-                                <option value="05">05</option>
-                                <option value="06">06</option>
-                                <option value="07">07</option>
-                                <option value="08">08</option>
-                                <option value="10">10</option>
-                                <option value="15">15</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                                <option value="21">21</option>
-                                <option value="22">22</option>
-                                <option value="23">23</option>
-                                <option value="24">24</option>
-                                <option value="30">30</option>
-                                <option value="35">35</option>
-                                <option value="40">40</option>
+                    <form class="form">
+                        <div class="form-group">
+                            <label class="label-style" for="nroVehiculo">Nro. vehículo</label>
+                            <select id="nroVehiculo" name="nroVehiculo" data-dropdown>
+                                <option value="">Seleccione un número</option>
+                                <option value="001">001</option>
+                                <option value="002">002</option>
+                                <option value="003">003</option>
+                                <option value="004">004</option>
+                                <option value="005">005</option>
+                                <option value="007">007</option>
+                                <option value="011">011</option>
+                                <option value="019">019</option>
+                                <option value="023">023</option>
+                                <option value="024">024</option>
+                                <option value="025">025</option>
+                                <option value="036">036</option>
+                                <option value="037">037</option>
+                                <option value="058">058</option>
+                                <option value="040">040</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="hour1" class="label-style">Hora </label>
-                        <input class="input-style" type="time" id="time1" value="">
-                    </div>
-                    <div class="form-group">
-                        <label class="label-style">Formato de hora </label>
-                        <input type="radio" id="shortHour" name="formatHour" value="short" checked>
-                        <label for="shortHout">Corto</label>
-                        <input type="radio" id="longHour" name="formatHour" value="long">
-                        <label for="longHour">Largo</label>
-                        <input type="radio" id="holidayHour" name="formatHour" value="holiday">
-                        <label for="holidayHour">Feriado</label>
-                    </div>
-                    <div class="form-group">
-                        <label class="label-style">Punto de inicio </label>
-                        <input class="input-style" list="controlPoint" placeholder="Buscar punto de inicio">
-                        <datalist id="controlPoint">
-                            <option>AAA</option>
-                            <option>BBB</option>
-                            <option>CCC</option>
-                            <option>DDD</option>
-                            <option>EEE</option>
-                            <option>FFF</option>
-                            <option>GGG</option>
-                            <option>ABC</option>
-                            <option>ABD</option>
-                            <option>CVH</option>
-                            <option>CUN</option>
-                            <option>KMD</option>
-                        </datalist>
-                    </div>
+                        <div class="form-group">
+                            <label for="hour1" class="label-style">Hora </label>
+                            <input class="input-style" type="time" id="time1" value="">
+                        </div>
+                        <div class="form-group">
+                            <label class="label-style">Formato de hora </label>
+                            <input type="radio" id="shortHour" name="formatHour" value="short" checked>
+                            <label for="shortHout">Corto</label>
+                            <input type="radio" id="longHour" name="formatHour" value="long">
+                            <label for="longHour">Largo</label>
+                            <input type="radio" id="holidayHour" name="formatHour" value="holiday">
+                            <label for="holidayHour">Feriado</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-style">Punto de inicio </label>
+                            <input class="input-style" list="controlPoint" placeholder="Buscar punto de inicio">
+                            <datalist id="controlPoint">
+                                <option>AAA</option>
+                                <option>BBB</option>
+                                <option>CCC</option>
+                                <option>DDD</option>
+                                <option>EEE</option>
+                                <option>FFF</option>
+                                <option>GGG</option>
+                                <option>ABC</option>
+                                <option>ABD</option>
+                                <option>CVH</option>
+                                <option>CUN</option>
+                                <option>KMD</option>
+                            </datalist>
+                        </div>
+                    </form>
                 </div>
                 <div class="card-footer">
-                    <div class="switch-button">
-                        <input type="checkbox" name="switch-button" id="switch-label" class="switch-button__checkbox">
-                        <label for="switch-label" class="switch-button__label"></label>
+                    <div class="left-side">
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <i class="fas fa-print"></i>
                     </div>
-                    <i class="fas fa-print"></i>
                     <button type="submit" class="is-info"><i class="fas fa-paper-plane"></i> Enviar</button>
-
                 </div>
             </div>
         </div>
@@ -389,8 +390,8 @@
                     <label for=""><strong>Placa: ABC-723</strong></label>
                 </div>
                 <div class="card-body flex">
-                    <img src="../img/Conductor1.png" id="imageConductor" onclick="" class="image" alt="conductor">
-                    <img src="../img/conductor2.jpg" id="imageCobrador" onclick="" class="image" alt="cobrador">
+                    <img src="../img/Conductor1.png" id="imageConductor" onclick="openModal('modalConductor')" class="image" alt="conductor">
+                    <img src="../img/conductor2.jpg" id="imageCobrador" onclick="openModal('modalCobrador')" class="image" alt="cobrador">
                     <button type="button" class="tooltip">
                         <i class="fas fa-map-marker-alt fa-2x"></i>
                         <span class="toolTipText">Monitoreo</span>
@@ -423,11 +424,11 @@
                         <i class="fas fa-tools fa-2x"></i>
                         <span class="toolTipText">Mantenimiento</span>
                     </button>
-                    <button type="button" id="btnMessage" class="tooltip">
+                    <button type="button" class="tooltip" onclick="openModal('message')">
                         <i class="fas fa-comment-alt fa-2x"></i>
                         <span class="toolTipText">Mensaje</span>
                     </button>
-                    <button id="btnDepartureProgrammed" class="tooltip">
+                    <button type="button" class="tooltip" onclick="openModal('programmedDeparture')">
                         <i class="fas fa-calendar-alt fa-2x"></i>
                         <span class="toolTipText">Partida programada</span>
                     </button>
@@ -436,20 +437,20 @@
         </div>
     </div>
 
-    <!-----------------MODALS------------------>
+    <!--modals-->
 
-    <!--modal send departure programmed -->
+    <!--modal anviar partida programada-->
     <div class="modal" id="programmedDeparture">
         <div class="modal-content">
             <div class="modal-header">
                 Enviar partida programada
-                <span class="close" id="close1">&times;</span>
+                <span onclick="closeModal('programmedDeparture')" class="close">&times;</span>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label class="label-style" for="nroBus">Nro. de vehículo </label>
-                    <input class="input-style" list="nroBus" placeholder="Buscar vehículo...">
-                    <datalist id="nroBus">
+                    <label for="">Nro. de vehiculo </label>
+                    <input class="input-style" list="nroBusMessage" placeholder="Buscar vehículo...">
+                    <datalist id="nroBusMessage">
                         <option>01</option>
                         <option>02</option>
                         <option value="03">03</option>
@@ -470,20 +471,19 @@
                         <option>35</option>
                         <option>40</option>
                     </datalist>
-
                 </div>
                 <div class="form-group">
-                    <label class="label-style" for="">Fecha </label>
-                    <input class="input-style" id="dateDefault" type="date" value="">
+                    <label for="date">Fecha </label>
+                    <input class="input-style" type="date" id="date" name="date">
                 </div>
                 <div class="form-group">
-                    <label for="hour2" class="label-style">Hora </label>
+                    <label for="hour1" class="label-style">Hora </label>
                     <input class="input-style" type="time" id="time2" value="">
                 </div>
                 <div class="form-group">
                     <label class="label-style">Formato de hora </label>
-                    <input type="radio" id="shortHour" name="formatHour" value="short">
-                    <label for="shortHour">Corto</label>
+                    <input type="radio" id="shortHour" name="formatHour" value="short" checked>
+                    <label for="shortHout">Corto</label>
                     <input type="radio" id="longHour" name="formatHour" value="long">
                     <label for="longHour">Largo</label>
                     <input type="radio" id="holidayHour" name="formatHour" value="holiday">
@@ -491,7 +491,7 @@
                 </div>
                 <div class="form-group">
                     <label class="label-style">Punto de inicio </label>
-                    <input class="input-style" list="controlPoint" placeholder="Buscar punto de inicio...">
+                    <input class="input-style" list="controlPoint" placeholder="Buscar punto de inicio">
                     <datalist id="controlPoint">
                         <option>AAA</option>
                         <option>BBB</option>
@@ -505,17 +505,16 @@
                         <option>CVH</option>
                         <option>CUN</option>
                         <option>KMD</option>
-                          
                     </datalist>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="button is-terciary" onclick="document.getElementById('programmedDeparture').style.display='none'">
+                <button class="button is-terciary" onclick="closeModal('programmedDeparture')">
                     Cerrar
                 </button>
-                <button class="is-info">                          
-                    <i class="fas fa-save"></i>                           
-                    Guardar
+                <button class="button is-info">                          
+                    <i class="fas fa-paper-plane"></i>                           
+                    Enviar
                 </button>
 
             </div>
@@ -523,12 +522,11 @@
     </div>
 
     <!--modal send message-->
-
     <div class="modal" id="message">
         <div class="modal-content">
             <div class="modal-header">
                 Enviar mensaje
-                <span class="close" id="close2">&times;</span>
+                <span class="close" onclick="closeModal('message')">&times;</span>
             </div>
             <div class="modal-body">
                 <div class="form-group">
@@ -563,7 +561,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="button is-terciary" onclick="document.getElementById('message').style.display='none'">
+                <button class="button is-terciary" onclick="closeModal('message')">
                     Cerrar
                 </button>
                 <button class="button is-info">                          
@@ -574,13 +572,14 @@
             </div>
         </div>
     </div>
+
     <!--modal conductor-->
 
     <div class="modal" id="modalConductor">
         <div class="modal-content">
             <div class="modal-header">
                 Conductor de la unidad Nro: 56
-                <span class="close" id="close3">&times;</span>
+                <span class="close" onclick="closeModal('modalConductor')">&times;</span>
             </div>
             <div class="modal-body">
                 <img src="../img/Conductor1.png" class="imageModal" alt="conductor">
@@ -603,7 +602,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 Cobrador de la unidad Nro: 56
-                <span class="close" id="close4">&times;</span>
+                <span class="close" onclick="closeModal('modalCobrador')">&times;</span>
             </div>
             <div class="modal-body">
                 <img src="../img/conductor2.jpg" class="imageModal" alt="conductor">
@@ -619,6 +618,7 @@
             </div>
         </div>
     </div>
+
 
     <script src="controlar.js"></script>
     <script src="https://kit.fontawesome.com/74ef1d0087.js" crossorigin="anonymous"></script>
