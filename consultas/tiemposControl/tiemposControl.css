@@ -317,6 +317,11 @@ th span {
     margin-right: 0;
 }
 
+.right-side input,
+.right-side select {
+    height: 30px;
+}
+
 .scrollTable {
     height: 520px;
 }
